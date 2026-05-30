@@ -1,0 +1,106 @@
+// ============================================
+// Gramer Dokan — Design Tokens
+// ============================================
+
+// Colors — Primary palette
+$color-yellow:        #FFC72C;   // primary accent — nav, buttons, highlights
+$color-yellow-dark:   #F5B400;
+$color-yellow-light:  #FFE08A;
+$color-red:           #E53935;   // map background, accents
+$color-red-dark:      #C62828;
+
+// Neutrals
+$color-black:         #000000;
+$color-dark:          #1A1A1A;
+$color-dark-2:        #2B2B2B;
+$color-gray-900:      #212121;
+$color-gray-800:      #424242;
+$color-gray-700:      #616161;
+$color-gray-600:      #757575;
+$color-gray-500:      #9E9E9E;
+$color-gray-400:      #BDBDBD;
+$color-gray-300:      #E0E0E0;
+$color-gray-200:      #EEEEEE;
+$color-gray-100:      #F5F5F5;
+$color-gray-50:       #FAFAFA;
+$color-white:         #FFFFFF;
+
+// Semantic
+$color-text:          $color-gray-900;
+$color-text-muted:    $color-gray-600;
+$color-border:        $color-gray-300;
+$color-bg:            $color-white;
+$color-bg-alt:        $color-gray-50;
+
+// Price colors
+$color-price:         $color-gray-900;
+$color-price-old:     #E53935;       // strikethrough red
+
+// Star rating
+$color-star:          #FFC107;
+
+// Save badge
+$color-save-bg:       #4CAF50;
+$color-save-text:     #FFFFFF;
+
+// Typography
+$font-bn:             'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+$font-en:             'Open Sans', 'Inter', sans-serif;
+$font-display:        'Poppins', 'Open Sans', sans-serif;
+
+// Font sizes
+$fs-xs:   11px;
+$fs-sm:   12px;
+$fs-base: 13px;
+$fs-md:   14px;
+$fs-lg:   16px;
+$fs-xl:   18px;
+$fs-2xl:  20px;
+$fs-3xl:  24px;
+$fs-4xl:  32px;
+$fs-5xl:  40px;
+
+// Font weights
+$fw-regular:  400;
+$fw-medium:   500;
+$fw-semibold: 600;
+$fw-bold:     700;
+$fw-black:    900;
+
+// Spacing
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 32px;
+$space-8: 40px;
+$space-9: 48px;
+$space-10: 64px;
+
+// Radii
+$radius-sm: 3px;
+$radius-md: 6px;
+$radius-lg: 10px;
+$radius-pill: 999px;
+
+// Container
+$container-max:  1280px;
+$container-pad:  16px;
+
+// Shadows
+$shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.06);
+$shadow-md:  0 2px 6px rgba(0, 0, 0, 0.08);
+$shadow-lg:  0 4px 16px rgba(0, 0, 0, 0.10);
+$shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+// Transitions
+$transition-fast: 0.15s ease;
+$transition-base: 0.25s ease;
+
+// Breakpoints (for Laravel responsive later)
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;

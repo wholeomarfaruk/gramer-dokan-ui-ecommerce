@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gramer Dokan — গ্রামের দোকান</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- jQuery + app.js (must register alpine:init before Alpine loads) + Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ============ TOP UTILITY BAR ============ -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__social">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
+        <span class="sep"></span>
+        <a href="#"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+        <span class="sep"></span>
+        <a href="#"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
+        <span class="sep"></span>
+        <a href="#"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
+      </div>
+      <div class="topbar__links" x-data>
+        <a href="#">Home</a><span class="sep">|</span>
+        <a href="#">About us</a><span class="sep">|</span>
+        <a href="#">Contact us</a><span class="sep">|</span>
+        <a href="#">Galerry</a><span class="sep">|</span>
+        <a href="#">Customer reviews</a><span class="sep">|</span>
+        <div class="lang-toggle">
+          <span class="lang-label" :class="$store.lang.current==='EN' && 'active'">EN</span>
+          <button 
+            class="toggle-switch" 
+            :class="$store.lang.current==='BN' && 'active'"
+            @click="$store.lang.current = $store.lang.current==='EN' ? 'BN' : 'EN'"
+            title="Toggle language: EN / BN"
+            type="button"
+          ></button>
+          <span class="lang-label" :class="$store.lang.current==='BN' && 'active'">BN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN HEADER ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">
+        <img src="assets/logo.png" alt="Gramer Dokan" class="logo-img" />
+      </a>
+
+      <div class="header__search">
+        <input type="text" placeholder="Search ..." />
+        <div class="search-icons">
+          <button title="Voice search"><i class="fa-solid fa-microphone"></i></button>
+          <button title="Image search"><i class="fa-solid fa-camera"></i></button>
+          <button title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </div>
+
+      <div class="header__call">
+        <span class="call-icon"><i class="fa-solid fa-phone"></i></span>
+        <div class="call-text">
+          <div class="label">Call or Whatsapp</div>
+          <div class="number">+8801341696475</div>
+        </div>
+      </div>
+
+      <a href="#" class="header__cart" x-data>
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Shopping Cart</span>
+        <span class="cart-count" x-text="$store.cart.count">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ YELLOW MAIN NAV ============ -->
+  <nav class="mainnav">
+    <div class="container mainnav__inner">
+      <ul class="mainnav__categories">
+        <li><a href="#">Honey</a></li>
+        <li><a href="#">Dates</a></li>
+        <li><a href="#">Spices</a></li>
+        <li><a href="#">Nuts &amp; Seeds</a></li>
+        <li><a href="#">Beverage</a></li>
+        <li><a href="#">Mango</a></li>
+        <li><a href="#">Rice</a></li>
+        <li><a href="#">Ghee &amp; Oil</a></li>
+      </ul>
+      <div class="mainnav__utilities">
+        <a href="#"><i class="fa-solid fa-gift"></i>Corporate Gift</a>
+        <a href="#"><i class="fa-solid fa-truck"></i>Track Parcel</a>
+        <a href="#"><i class="fa-regular fa-heart"></i>Wishlist</a>
+        <a href="#"><i class="fa-regular fa-user"></i>Signin</a>
+        <button class="more-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <!-- Main banner -->
+        <div class="hero__banner hero__banner--image" x-data="heroSlider">
+          <img src="assets/hero-banner.jpg" alt="Season Fresh Mango — Gramer Dokan" class="hero__banner__img" />
+          <div class="hero__banner__dots">
+            <span :class="slide===0 && 'active'" @click="slide=0"></span>
+            <span :class="slide===1 && 'active'" @click="slide=1"></span>
+            <span :class="slide===2 && 'active'" @click="slide=2"></span>
+          </div>
+        </div>
+
+        <!-- Side card with Saudi map -->
+        <aside class="hero__side">
+          <div class="side-logo">DOKAN</div>
+          <div class="saudi-map">
+            <object data="assets/saudi-map.svg" type="image/svg+xml" aria-label="Saudi Arabia map"></object>
+          </div>
+          <div class="saudi-label">SAUDI<br/>ARABIA</div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED CATEGORY ============ -->
+  <section class="featured-cat">
+    <div class="container">
+      <h2 class="featured-cat__title">Featured Category</h2>
+      <div class="featured-cat__grid">
+        <a class="cat-pill"><span class="cat-pill__icon">🌰</span>Dates</a>
+        <a class="cat-pill"><span class="cat-pill__icon">🍯</span>Honey</a>
+        <a class="cat-pill"><span class="cat-pill__icon">🥭</span>Mango</a>
+        <a class="cat-pill"><span class="cat-pill__icon">🍯</span>Honey</a>
+        <a class="cat-pill"><span class="cat-pill__icon">🌰</span>Dates</a>
+        <a class="cat-pill"><span class="cat-pill__icon">🍯</span>Honey</a>
+        <a class="cat-pill"><span class="cat-pill__icon">🌰</span>Dates</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TOP SELLING PRODUCTS ============ -->
+  <section class="top-selling">
+    <div class="container">
+      <div class="section-center-title">
+        <h2>Top Selling Products</h2>
+      </div>
+      <div class="product-grid product-grid--horizontal" x-data="productList(8, 'Wild Sundarban Honey')">
+        <template x-for="p in products" :key="p.id">
+          <article class="product-card product-card--horizontal" x-data="{ open: false }">
+            <span class="product-card__badge">Save 300</span>
+            <button class="product-card__wishlist"
+                    @click="$store.wishlist.toggle(p.id)"
+                    :class="$store.wishlist.has(p.id) && 'is-active'">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <div class="product-card__media">
+              <img src="assets/products/product-1.svg" :alt="p.name" />
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name" x-text="p.name"></h3>
+              <div class="product-card__price">
+                <span class="now" x-text="'৳' + p.price"></span>
+                <span class="old" x-text="'৳' + p.oldPrice"></span>
+              </div>
+              <div class="product-card__actions">
+                <button class="product-card__btn product-card__btn--cart" @click="$store.cart.add(p)">
+                  <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                </button>
+                <button class="product-card__btn product-card__btn--buy">
+                  <i class="fa-solid fa-cart-shopping"></i>Buy Now
+                </button>
+              </div>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COOKING ESSENTIAL ============ -->
+  <section>
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Cooking Essential</h2>
+        <a class="section-view-all" href="#">VIEW ALL ITEMS <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="product-carousel" x-data="carousel(3)">
+        <button class="pc-arrow pc-arrow--prev" @click="prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="product-grid product-grid--6" x-data="productList(6, 'Cold Pressed Coconut Oil')">
+          <template x-for="p in products" :key="p.id">
+            <article class="product-card">
+              <span class="product-card__badge">Save 10%</span>
+              <button class="product-card__wishlist"
+                      @click="$store.wishlist.toggle(p.id + 100)"
+                      :class="$store.wishlist.has(p.id + 100) && 'is-active'">
+                <i class="fa-solid fa-heart"></i>
+              </button>
+              <div class="product-card__media">
+                <img src="assets/products/product-2.svg" :alt="p.name" />
+              </div>
+              <div class="product-card__body">
+                <h3 class="product-card__name">Cold Pressed Coconut Oil</h3>
+                <div class="product-card__price">
+                  <span class="now">৳1890</span>
+                  <span class="old">৳1990</span>
+                </div>
+                <div class="product-card__actions">
+                  <button class="product-card__btn product-card__btn--cart" @click="$store.cart.add(p)">
+                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                  </button>
+                  <button class="product-card__btn product-card__btn--buy">Buy now</button>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+        <button class="pc-arrow pc-arrow--next" @click="next"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREMIUM DATES (1) ============ -->
+  <section>
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Premium Dates</h2>
+        <a class="section-view-all" href="#">VIEW ALL ITEMS <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="product-carousel" x-data="carousel(3)">
+        <button class="pc-arrow pc-arrow--prev" @click="prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="product-grid product-grid--5">
+          <template x-for="i in 5" :key="i">
+            <article class="product-card">
+              <span class="product-card__badge">Save 10%</span>
+              <button class="product-card__wishlist"
+                      @click="$store.wishlist.toggle(i + 200)"
+                      :class="$store.wishlist.has(i + 200) && 'is-active'">
+                <i class="fa-solid fa-heart"></i>
+              </button>
+              <div class="product-card__media">
+                <img src="assets/products/product-3.svg" alt="Premium Dates" />
+              </div>
+              <div class="product-card__body">
+                <h3 class="product-card__name">Cold Pressed Coconut Oil</h3>
+                <div class="product-card__price">
+                  <span class="now">৳1890</span>
+                  <span class="old">৳1990</span>
+                </div>
+                <div class="product-card__actions">
+                  <button class="product-card__btn product-card__btn--cart">
+                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                  </button>
+                  <button class="product-card__btn product-card__btn--buy">Buy now</button>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+        <button class="pc-arrow pc-arrow--next" @click="next"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="pc-dots">
+          <span :class="currentSlide===0 && 'active'" @click="goto(0)"></span>
+          <span :class="currentSlide===1 && 'active'" @click="goto(1)"></span>
+          <span :class="currentSlide===2 && 'active'" @click="goto(2)"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MANGO PROMO BANNER ============ -->
+  <div class="container">
+    <div class="promo-banner promo-banner--mango">
+      <div class="promo-banner__left">
+        <div class="mango-icon">🥭</div>
+      </div>
+      <div class="promo-banner__text">
+        সতিকারের কেমিক্যাল মুক্ত আম অর্ডার করতে ক্লিক করুন
+      </div>
+      <div class="promo-banner__brand">
+        <span class="brand-pill">🥭 Season Fresh<br/>mango</span>
+        <span class="brand-pill brand-pill--alt">DOKAN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NATURAL MASALA ============ -->
+  <section>
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Natural Masala</h2>
+        <a class="section-view-all" href="#">VIEW ALL ITEMS <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid product-grid--5" x-data>
+        <template x-for="i in 5" :key="i">
+          <article class="product-card">
+            <span class="product-card__badge">Save 10%</span>
+            <button class="product-card__wishlist"
+                    @click="$store.wishlist.toggle(i + 300)"
+                    :class="$store.wishlist.has(i + 300) && 'is-active'">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <div class="product-card__media">
+              <img src="assets/products/product-4.svg" alt="Natural Masala" />
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">Cold Pressed Coconut Oil</h3>
+              <div class="product-card__price">
+                <span class="now">৳1890</span>
+                <span class="old">৳1990</span>
+              </div>
+              <div class="product-card__actions">
+                <button class="product-card__btn product-card__btn--cart">
+                  <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                </button>
+                <button class="product-card__btn product-card__btn--buy">Buy now</button>
+              </div>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREMIUM DATES (2) ============ -->
+  <section>
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Premium Dates</h2>
+        <a class="section-view-all" href="#">VIEW ALL ITEMS <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="product-carousel" x-data="carousel(3)">
+        <button class="pc-arrow pc-arrow--prev" @click="prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="product-grid product-grid--5">
+          <template x-for="i in 5" :key="i">
+            <article class="product-card">
+              <span class="product-card__badge">Save 10%</span>
+              <button class="product-card__wishlist"
+                      @click="$store.wishlist.toggle(i + 400)"
+                      :class="$store.wishlist.has(i + 400) && 'is-active'">
+                <i class="fa-solid fa-heart"></i>
+              </button>
+              <div class="product-card__media">
+                <img src="assets/products/product-3.svg" alt="Premium Dates" />
+              </div>
+              <div class="product-card__body">
+                <h3 class="product-card__name">Cold Pressed Coconut Oil</h3>
+                <div class="product-card__price">
+                  <span class="now">৳1890</span>
+                  <span class="old">৳1990</span>
+                </div>
+                <div class="product-card__actions">
+                  <button class="product-card__btn product-card__btn--cart">
+                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                  </button>
+                  <button class="product-card__btn product-card__btn--buy">Buy now</button>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+        <button class="pc-arrow pc-arrow--next" @click="next"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="pc-dots">
+          <span :class="currentSlide===0 && 'active'" @click="goto(0)"></span>
+          <span :class="currentSlide===1 && 'active'" @click="goto(1)"></span>
+          <span :class="currentSlide===2 && 'active'" @click="goto(2)"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORDER NOW BANNER ============ -->
+  <div class="container">
+    <div class="promo-banner promo-banner--order">
+      <div class="promo-banner__text">
+        এখন থেকে গ্রামের দোকান এ আপনারা কর্পোরেট গিফট অর্ডার করতে পারবেন
+      </div>
+      <a class="promo-banner__cta" href="#">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="promo-banner__brand">
+        <span class="brand-pill">🥭 Season from<br/>mango</span>
+        <span class="brand-pill brand-pill--alt">DOKAN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CUSTOMER REVIEW ============ -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Customer review</h2>
+        <a class="section-view-all" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="reviews__grid">
+        <!-- 5 review cards -->
+        <article class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__avatar" style="background:#FFE0B2; color:#7B5E3C;">A</div>
+            <div class="review-card__person">
+              <div class="name">প্রফ আহমদ হোসেন</div>
+              <div class="role">ঢাকা, বাংলাদেশ</div>
+            </div>
+          </div>
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            গ্রামের দোকানের সব পণ্য খুবই ভালো মানের। আমি নিয়মিত খেজুর এবং মধু কিনে থাকি। তাদের পণ্যের গুণগত মান এবং দাম দুটোই চমৎকার। আমি সবাইকে এদের পণ্য ক্রয় করতে পরামর্শ দিব।
+          </p>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__avatar" style="background:#C8E6C9; color:#2E7D32;">M</div>
+            <div class="review-card__person">
+              <div class="name">প্রফ আহমদ হোসেন</div>
+              <div class="role">ঢাকা, বাংলাদেশ</div>
+            </div>
+          </div>
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            গ্রামের দোকানের সব পণ্য খুবই ভালো মানের। আমি নিয়মিত খেজুর এবং মধু কিনে থাকি। তাদের পণ্যের গুণগত মান এবং দাম দুটোই চমৎকার।
+          </p>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__avatar" style="background:#FFCDD2; color:#C62828;">শ</div>
+            <div class="review-card__person">
+              <div class="name">শেহারজাদ মোসলেহ</div>
+              <div class="role">ঢাকা, বাংলাদেশ</div>
+            </div>
+          </div>
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            গ্রামের দোকানের সকল প্রোডাক্ট এর মান অনেক ভালো। আমি বিশেষ করে তাদের খেজুর খুব পছন্দ করি। এদের প্রোডাক্ট আমি সবাইকে recommend করব।
+          </p>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__avatar" style="background:#BBDEFB; color:#1565C0;">F</div>
+            <div class="review-card__person">
+              <div class="name">ফাহমিদা চৌধুরী</div>
+              <div class="role">Community Member</div>
+            </div>
+          </div>
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            গ্রামের দোকান এর প্রোডাক্ট গুলো সত্যি অনেক ভালো। বিশেষ করে তাদের মধু এবং খেজুরের কোয়ালিটি অসাধারণ। সবাইকে কেনার জন্য রিকমেন্ড করছি।
+          </p>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__avatar" style="background:#FFE082; color:#E65100;">র</div>
+            <div class="review-card__person">
+              <div class="name">রিয়াজ আহমেদ</div>
+              <div class="role">ঢাকা, বাংলাদেশ</div>
+            </div>
+          </div>
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            গ্রামের দোকানের সব পণ্য খুবই ভালো মানের। আমি নিয়মিত খেজুর এবং মধু কিনে থাকি। তাদের পণ্যের গুণগত মান এবং দাম দুটোই চমৎকার। সবাইকে কিনতে বলব।
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO REVIEW ============ -->
+  <section class="videos">
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Video review</h2>
+        <a class="section-view-all" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="videos__grid" x-data>
+        <template x-for="i in 5" :key="i">
+          <article class="video-card">
+            <span class="video-card__logo">DOKAN</span>
+            <div class="video-card__map">
+              <object data="assets/saudi-map.svg" type="image/svg+xml" aria-label="Saudi"></object>
+            </div>
+            <div class="video-card__label">SAUDI<br/>ARABIA</div>
+            <button class="video-card__play"><i class="fa-solid fa-play"></i></button>
+          </article>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEASON FRESH MANGO BANNER ============ -->
+  <div class="container">
+    <div class="promo-banner">
+      <div class="promo-banner__text" style="text-align:center;">
+        সিজন ফ্রেস ম্যাঙ্গো একটি গ্রামের দোকান এর পণ্য
+      </div>
+      <div class="promo-banner__brand">
+        <span class="brand-pill">🥭 Season Fresh<br/>mango</span>
+        <span class="brand-pill brand-pill--alt">DOKAN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ READ OUT THE BLOGS ============ -->
+  <section class="blogs">
+    <div class="container">
+      <div class="section-title-row">
+        <h2 class="section-title">Read out the blogs</h2>
+        <a class="section-view-all" href="#">VIEW ALL ITEMS <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="blogs__grid">
+        <article class="blog-card">
+          <div class="blog-card__media"><span class="date-pill">18 April, 2026</span></div>
+          <div class="blog-card__body">
+            <h3 class="blog-card__title">আমভিটামিন রোগীরা কোন খেজুর খেতে পারবে না এক নজরে দেখে নেয়া যাক।</h3>
+            <a class="blog-card__more" href="#">সম্পূর্ণ পোস্টটি পড়ুন</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card__media"><span class="date-pill">18 April, 2026</span></div>
+          <div class="blog-card__body">
+            <h3 class="blog-card__title">আমভিটামিন রোগীরা কোন খেজুর খেতে পারবে না এক নজরে দেখে নেয়া যাক।</h3>
+            <a class="blog-card__more" href="#">সম্পূর্ণ পোস্টটি পড়ুন</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card__media"><span class="date-pill">18 April, 2026</span></div>
+          <div class="blog-card__body">
+            <h3 class="blog-card__title">আমভিটামিন রোগীরা কোন খেজুর খেতে পারবে না এক নজরে দেখে নেয়া যাক।</h3>
+            <a class="blog-card__more" href="#">সম্পূর্ণ পোস্টটি পড়ুন</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card__media"><span class="date-pill">18 April, 2026</span></div>
+          <div class="blog-card__body">
+            <h3 class="blog-card__title">আমভিটামিন রোগীরা কোন খেজুর খেতে পারবে না এক নজরে দেখে নেয়া যাক।</h3>
+            <a class="blog-card__more" href="#">সম্পূর্ণ পোস্টটি পড়ুন</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA GRID ============ -->
+  <section class="cta-grid">
+    <div class="container">
+      <div class="cta-grid__inner">
+        <a class="cta-tile">
+          <span class="cta-tile__icon"><i class="fa-solid fa-handshake"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">Corporate Deal</div>
+            <div class="sub">To make a deal click here</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--facebook"><i class="fa-brands fa-facebook-f"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">Facebook Review</div>
+            <div class="sub">To see the review click here</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--google" style="color:#1877F2;font-weight:900;font-size:18px;">G</span>
+          <div class="cta-tile__text">
+            <div class="title">Google Review</div>
+            <div class="sub">To see the review click here</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--share"><i class="fa-solid fa-coins"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">Be a Shareholder</div>
+            <div class="sub">For more details click here</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--wholesale"><i class="fa-solid fa-boxes-stacked"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">Wholesale</div>
+            <div class="sub">To get Product click here</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--mango"><i class="fa-brands fa-facebook"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">Season Fresh Mango</div>
+            <div class="sub">Follow our facebook page</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--community"><i class="fa-brands fa-facebook-f"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">Our Community</div>
+            <div class="sub">To join fb group click here</div>
+          </div>
+        </a>
+        <a class="cta-tile">
+          <span class="cta-tile__icon cta-tile__icon--shop"><i class="fa-solid fa-cart-shopping"></i></span>
+          <div class="cta-tile__text">
+            <div class="title">All Products</div>
+            <div class="sub">To visit shop page click here</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOTTOM SEARCH STRIP ============ -->
+  <section class="bottom-search">
+    <div class="container">
+      <div class="bottom-search__inner">
+        <div class="bottom-search__tag">
+          গ্রামের স্বাদ ও ঐতিহ্য,<br/>
+          এক ক্লিকে আপনার ঘরে।
+        </div>
+        <div class="bottom-search__field">
+          <input type="text" placeholder="Search Product here..." />
+          <button>Search</button>
+        </div>
+        <div class="bottom-search__socials">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAIN FOOTER ============ -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <div class="logo-wrap">
+            <img src="assets/logo.png" alt="Gramer Dokan" class="logo-img" />
+          </div>
+          <p>Gramer Dokan is an e-commerce platform focused on delivering safe, reliable, and authentic village-inspired food products to your doorstep. We combine traditional taste with modern convenience, ensuring quality and trust in every order.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="social-btn" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+          <div class="app-downloads">
+            <a href="#" class="app-btn">
+              <span class="app-icon"><i class="fa-brands fa-apple"></i></span>
+              <div class="app-text">
+                <small>Download on the</small>
+                <span>App Store</span>
+              </div>
+            </a>
+            <a href="#" class="app-btn">
+              <span class="app-icon"><i class="fa-brands fa-google-play"></i></span>
+              <div class="app-text">
+                <small>Get it on</small>
+                <span>Google Play</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Important Links -->
+        <div class="footer-col">
+          <h4>Important Links</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Delivery Policy</a></li>
+            <li><a href="#">Exchange &amp; Cancellation</a></li>
+            <li><a href="#">Terms &amp; Condition</a></li>
+            <li><a href="#">Company Information</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">Corporate Deal</a></li>
+            <li><a href="#">Tracking Order</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Payment</a></li>
+            <li><a href="#">Support Center</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Our Community</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer-col">
+          <h4>Contact us</h4>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="ci-info">
+              <small>Call or WhatsApp</small>
+              <span><a href="tel:+8801341696475">+88 01341 696 475</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="ci-info">
+              <small>Email address</small>
+              <span><a href="mailto:contact@gramerdokan.com.bd">contact@gramerdokan.com.bd</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-warehouse"></i></div>
+            <div class="ci-info">
+              <small>Warehouse</small>
+              <span>Kalaroa, Satkhira</span>
+            </div>
+          </div>
+          <div class="newsletter-wrap">
+            <input type="email" placeholder="Your email address..." />
+            <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 <span>Gramer Dokan</span>. All rights reserved.</p>
+        <div class="our-brands">
+          <small>Our Brands</small>
+          <div class="brand-logos">
+            <span class="brand-pill">🥭 Season Fresh Mango</span>
+            <span class="brand-pill brand-pill--alt">DOKAN</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="payments">
+    <div class="container payments__inner">
+      <span class="payments__chip">VISA</span>
+      <span class="payments__chip">MC</span>
+      <span class="payments__chip">AMEX</span>
+      <span class="payments__chip">DBBL</span>
+      <span class="payments__chip">bKash</span>
+      <span class="payments__chip">Nagad</span>
+      <span class="payments__chip">Rocket</span>
+      <span class="payments__chip">UPay</span>
+      <span class="payments__chip">SSL</span>
+      <span class="payments__chip">PayPal</span>
+      <span class="payments__chip">Stripe</span>
+      <span class="payments__chip">Card</span>
+    </div>
+  </div>
+
+</body>
+</html>

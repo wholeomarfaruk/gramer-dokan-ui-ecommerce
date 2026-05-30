@@ -1,0 +1,255 @@
+// ============================================
+// Hero section + Featured Categories
+// ============================================
+@import "variables";
+
+// -------- Hero (banner + side card) --------
+.hero {
+  padding: 16px 0 8px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 14px;
+  }
+
+  // Main banner — full-bleed image
+  &__banner {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 1920 / 1005;
+    background: #0a1a0a;
+
+    &--image .hero__banner__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    &__title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      color: $color-white;
+      width: 100%;
+      padding: 0 40px;
+
+      .small {
+        font-family: $font-bn;
+        font-size: 16px;
+        font-weight: $fw-semibold;
+        color: #FFD27A;
+        margin-bottom: 6px;
+        opacity: 0.9;
+      }
+
+      .big {
+        font-family: $font-bn;
+        font-size: 40px;
+        font-weight: $fw-bold;
+        color: #FFE9B0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        line-height: 1.1;
+      }
+    }
+
+    // Khejur product mockups on table
+    &__products {
+      position: absolute;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 24px;
+      padding: 0 60px;
+
+      .khejur-pack {
+        width: 80px;
+        height: 100px;
+        background: linear-gradient(180deg, #f4d27a 0%, #c89a4a 100%);
+        border-radius: 4px;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+        &::after {
+          content: "Khajuri";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: $font-en;
+          font-size: 10px;
+          font-weight: $fw-bold;
+          color: $color-gray-900;
+        }
+
+        &--bowl {
+          width: 90px;
+          height: 70px;
+          background: radial-gradient(ellipse at center, #6b4423 0%, #3d2817 100%);
+          border-radius: 50% 50% 8px 8px;
+
+          &::after {
+            content: "";
+            display: none;
+          }
+        }
+      }
+    }
+
+    // Pagination dots
+    &__dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+
+      span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+
+        &.active {
+          background: $color-yellow;
+          width: 24px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  // Side red card with Saudi Arabia map
+  &__side {
+    background: $color-red;
+    border-radius: 6px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+
+    .side-logo {
+      align-self: flex-start;
+      font-family: $font-en;
+      font-size: 14px;
+      font-weight: $fw-black;
+      color: $color-white;
+      letter-spacing: 1px;
+    }
+
+    .saudi-map {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+
+      svg {
+        width: 100%;
+        max-height: 220px;
+      }
+    }
+
+    .saudi-label {
+      position: absolute;
+      top: 50%;
+      right: 26%;
+      transform: translateY(-50%);
+      background: $color-white;
+      color: $color-gray-900;
+      font-family: $font-en;
+      font-size: 10px;
+      font-weight: $fw-bold;
+      padding: 3px 6px;
+      border-radius: 2px;
+      letter-spacing: 0.4px;
+      text-align: center;
+      line-height: 1.1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// -------- Featured Category strip --------
+.featured-cat {
+  padding: 16px 0;
+
+  &__title {
+    font-size: 16px;
+    font-weight: $fw-bold;
+    color: $color-gray-900;
+    padding-bottom: 6px;
+    border-bottom: 1px solid $color-gray-200;
+    margin-bottom: 14px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 50px;
+      height: 2px;
+      background: $color-yellow;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+}
+
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 8px;
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: $fw-semibold;
+  color: $color-gray-900;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-yellow;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $color-yellow-light;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

@@ -1,0 +1,334 @@
+// ============================================
+// Header — top bar, main header, yellow nav
+// ============================================
+@import "variables";
+
+// -------- Top utility bar (very thin black strip) --------
+.topbar {
+  background: $color-white;
+  border-bottom: 1px solid $color-gray-200;
+  font-size: 11px;
+  color: $color-gray-700;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 28px;
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: $color-gray-800;
+      font-size: 11px;
+
+      .icon {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .sep {
+      width: 1px;
+      height: 12px;
+      background: $color-gray-300;
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    a {
+      color: $color-gray-800;
+      padding: 0 6px;
+      font-size: 11px;
+
+      &:hover { color: $color-yellow-dark; }
+    }
+
+    .sep {
+      color: $color-gray-400;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 12px;
+      gap: 8px;
+    }
+
+    // Toggle switch component
+    .toggle-switch {
+      position: relative;
+      width: 32px;
+      height: 16px;
+      background: $color-gray-300;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background $transition-fast;
+      border: none;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+
+      &.active {
+        background: $color-yellow;
+      }
+
+      // Animated circle
+      &::before {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: $color-white;
+        border-radius: 50%;
+        top: 2px;
+        left: 2px;
+        transition: left $transition-fast;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      &.active::before {
+        left: 18px;
+      }
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+
+    .lang-label {
+      font-size: 10px;
+      font-weight: $fw-semibold;
+      text-transform: uppercase;
+      color: $color-gray-700;
+      letter-spacing: 0.5px;
+
+      &.active {
+        color: $color-yellow-dark;
+      }
+    }
+  }
+}
+
+// -------- Main header --------
+.header {
+  background: $color-white;
+  padding: 14px 0;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 200px 1fr auto auto;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+  &__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: $color-white;
+    border: 1px solid $color-gray-300;
+    border-radius: 4px;
+    height: 38px;
+    overflow: hidden;
+    transition: border-color $transition-fast;
+
+    &:focus-within { border-color: $color-yellow; }
+
+    input {
+      flex: 1;
+      height: 100%;
+      border: 0;
+      padding: 0 14px;
+      font-size: 13px;
+      background: transparent;
+
+      &::placeholder { color: $color-gray-500; }
+    }
+
+    .search-icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-right: 8px;
+
+      button {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-gray-700;
+        border-radius: 3px;
+
+        &:hover { background: $color-gray-100; }
+
+        svg { width: 16px; height: 16px; }
+      }
+    }
+  }
+
+  &__call {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .call-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: $color-yellow;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-black;
+
+      svg { width: 18px; height: 18px; }
+    }
+
+    .call-text {
+      line-height: 1.15;
+      .label {
+        font-size: 10px;
+        color: $color-gray-700;
+      }
+      .number {
+        font-family: $font-en;
+        font-size: 15px;
+        font-weight: $fw-bold;
+        color: $color-gray-900;
+      }
+    }
+  }
+
+  &__cart {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: $color-yellow;
+    color: $color-black;
+    padding: 9px 16px;
+    border-radius: 4px;
+    font-weight: $fw-semibold;
+    font-size: 13px;
+    position: relative;
+    transition: background $transition-fast;
+
+    &:hover { background: $color-yellow-dark; }
+
+    svg { width: 18px; height: 18px; }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: $color-red;
+      color: $color-white;
+      font-family: $font-en;
+      font-size: 10px;
+      font-weight: $fw-bold;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+// -------- Yellow main navigation --------
+.mainnav {
+  background: $color-yellow;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px;
+  }
+
+  &__categories {
+    display: flex;
+    align-items: center;
+    gap: 0;
+
+    > li {
+      > a {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: $fw-semibold;
+        color: $color-black;
+        position: relative;
+        transition: background $transition-fast;
+
+        &:hover { background: rgba(0, 0, 0, 0.08); }
+
+        .chev {
+          width: 10px;
+          height: 10px;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  &__utilities {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: $fw-semibold;
+      color: $color-black;
+
+      svg { width: 14px; height: 14px; }
+
+      &:hover { opacity: 0.75; }
+    }
+
+    .more-menu {
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-black;
+      border-radius: 3px;
+
+      &:hover { background: rgba(0, 0, 0, 0.08); }
+    }
+  }
+}

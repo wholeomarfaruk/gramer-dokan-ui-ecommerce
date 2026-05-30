@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  
+  <defs>
+    <linearGradient id="honey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D97706"></stop>
+      <stop offset="50%" stop-color="#B45309"></stop>
+      <stop offset="100%" stop-color="#92400E"></stop>
+    </linearGradient>
+  </defs>
+  
+  <rect x="80" y="25" width="40" height="12" rx="2" fill="#1F2937"></rect>
+  
+  <rect x="85" y="37" width="30" height="15" fill="#374151"></rect>
+  
+  <path d="M 70 52 Q 70 56 73 58 L 73 165 Q 73 175 83 175 L 117 175 Q 127 175 127 165 L 127 58 Q 130 56 130 52 Z" fill="url(#honey)"></path>
+  
+  <rect x="75" y="80" width="50" height="60" rx="2" fill="#FFFFFF" opacity="0.95"></rect>
+  <rect x="78" y="85" width="44" height="3" fill="#92400E"></rect>
+  <rect x="80" y="95" width="40" height="2" fill="#374151"></rect>
+  <rect x="80" y="102" width="40" height="2" fill="#374151"></rect>
+  <rect x="82" y="115" width="36" height="20" rx="1" fill="#FCD34D"></rect>
+  <text x="100" y="128" font-family="sans-serif" font-size="6" font-weight="bold" fill="#7C2D12" text-anchor="middle">HONEY</text>
+</svg>

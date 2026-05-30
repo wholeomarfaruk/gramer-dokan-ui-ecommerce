@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  
+  <defs>
+    <linearGradient id="mango" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"></stop>
+      <stop offset="50%" stop-color="#F59E0B"></stop>
+      <stop offset="100%" stop-color="#D97706"></stop>
+    </linearGradient>
+  </defs>
+  
+  <rect x="70" y="35" width="60" height="140" rx="6" fill="#1F2937"></rect>
+  
+  <rect x="74" y="50" width="52" height="110" fill="#0F172A"></rect>
+  
+  <rect x="74" y="50" width="52" height="14" fill="#FCD34D"></rect>
+  <text x="100" y="61" font-family="sans-serif" font-size="7" font-weight="bold" fill="#1F2937" text-anchor="middle">GRAMER</text>
+  
+  <circle cx="100" cy="95" r="20" fill="url(#mango)"></circle>
+  <ellipse cx="95" cy="90" rx="3" ry="5" fill="#FBBF24" opacity="0.5"></ellipse>
+  
+  <rect x="74" y="135" width="52" height="20" fill="#FCD34D"></rect>
+  <text x="100" y="148" font-family="sans-serif" font-size="6" font-weight="bold" fill="#1F2937" text-anchor="middle">PURE</text>
+  <text x="100" y="156" font-family="sans-serif" font-size="5" fill="#1F2937" text-anchor="middle">PRODUCT</text>
+</svg>

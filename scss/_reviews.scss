@@ -1,0 +1,259 @@
+// ============================================
+// Customer reviews + Video reviews + Blogs
+// ============================================
+@import "variables";
+
+// -------- Customer reviews --------
+.reviews {
+  position: relative;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+}
+
+.review-card {
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: $color-gray-200;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-gray-700;
+    font-family: $font-en;
+    font-size: 13px;
+    font-weight: $fw-bold;
+  }
+
+  &__person {
+    flex: 1;
+    min-width: 0;
+
+    .name {
+      font-size: 12px;
+      font-weight: $fw-bold;
+      color: $color-gray-900;
+      line-height: 1.2;
+    }
+    .role {
+      font-size: 10px;
+      color: $color-gray-600;
+      line-height: 1.2;
+    }
+  }
+
+  &__stars {
+    display: inline-flex;
+    gap: 1px;
+    color: $color-star;
+    font-size: 12px;
+  }
+
+  &__text {
+    font-family: $font-bn;
+    font-size: 11px;
+    line-height: 1.5;
+    color: $color-gray-700;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// -------- Video reviews (vertical cards with Saudi map image) --------
+.videos {
+  position: relative;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+}
+
+.video-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  background: $color-red;
+  aspect-ratio: 9 / 14;
+  cursor: pointer;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-lg;
+  }
+
+  &__logo {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 3;
+    font-family: $font-en;
+    font-size: 11px;
+    font-weight: $fw-black;
+    color: $color-white;
+    letter-spacing: 1px;
+  }
+
+  &__map {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 95%;
+      height: 65%;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 45%;
+    right: 22%;
+    transform: translateY(-50%);
+    background: $color-white;
+    color: $color-gray-900;
+    font-family: $font-en;
+    font-size: 9px;
+    font-weight: $fw-bold;
+    padding: 2px 5px;
+    border-radius: 2px;
+    line-height: 1.1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  &__play {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-red;
+    opacity: 0;
+    transition: opacity $transition-fast;
+
+    svg { width: 14px; height: 14px; }
+  }
+
+  &:hover &__play { opacity: 1; }
+}
+
+// -------- Blog cards --------
+.blogs {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+}
+
+.blog-card {
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: $color-gray-300;
+  }
+
+  &__media {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #d4c4a0 0%, #8b7355 100%);
+    position: relative;
+    overflow: hidden;
+
+    .date-pill {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: $color-yellow;
+      color: $color-gray-900;
+      font-family: $font-en;
+      font-size: 9px;
+      font-weight: $fw-bold;
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    // Placeholder person silhouette
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 80%;
+      background: radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.3), transparent 50%),
+                  linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.15) 100%);
+    }
+  }
+
+  &__body {
+    padding: 10px 12px 12px;
+  }
+
+  &__title {
+    font-family: $font-bn;
+    font-size: 12px;
+    font-weight: $fw-semibold;
+    color: $color-gray-900;
+    line-height: 1.45;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__more {
+    font-family: $font-bn;
+    font-size: 11px;
+    font-weight: $fw-semibold;
+    color: $color-gray-700;
+    text-decoration: underline;
+
+    &:hover { color: $color-yellow-dark; }
+  }
+}

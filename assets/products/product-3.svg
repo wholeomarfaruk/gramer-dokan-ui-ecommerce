@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  
+  <defs>
+    <linearGradient id="datebox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"></stop>
+      <stop offset="100%" stop-color="#F59E0B"></stop>
+    </linearGradient>
+  </defs>
+  
+  <rect x="40" y="60" width="120" height="105" rx="4" fill="#FFFFFF" stroke="#D4D4D8" stroke-width="1"></rect>
+  
+  <rect x="40" y="60" width="120" height="22" rx="4" fill="url(#datebox)"></rect>
+  <rect x="40" y="76" width="120" height="6" fill="#000000"></rect>
+  
+  <text x="100" y="74" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1F2937" text-anchor="middle">PREMIUM DATES</text>
+  
+  <ellipse cx="65" cy="115" rx="8" ry="11" fill="#7C2D12"></ellipse>
+  <ellipse cx="80" cy="120" rx="8" ry="11" fill="#92400E"></ellipse>
+  <ellipse cx="95" cy="115" rx="8" ry="11" fill="#7C2D12"></ellipse>
+  <ellipse cx="110" cy="120" rx="8" ry="11" fill="#92400E"></ellipse>
+  <ellipse cx="125" cy="115" rx="8" ry="11" fill="#7C2D12"></ellipse>
+  <ellipse cx="135" cy="125" rx="8" ry="11" fill="#92400E"></ellipse>
+  <ellipse cx="72" cy="135" rx="8" ry="11" fill="#92400E"></ellipse>
+  <ellipse cx="100" cy="138" rx="8" ry="11" fill="#7C2D12"></ellipse>
+  <ellipse cx="118" cy="140" rx="8" ry="11" fill="#92400E"></ellipse>
+  
+  <rect x="40" y="155" width="120" height="10" fill="url(#datebox)"></rect>
+</svg>

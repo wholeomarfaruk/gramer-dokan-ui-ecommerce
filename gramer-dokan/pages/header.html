@@ -1,0 +1,150 @@
+<!-- ============================================
+     GRAMER DOKAN — Header Partial
+     Laravel: resources/views/partials/header.blade.php
+     ============================================ -->
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="{{ url('/') }}">Home</a>
+      <a href="{{ url('/about') }}">About us</a>
+      <a href="{{ url('/contact') }}">Contact us</a>
+      <a href="{{ url('/gallery') }}">Gallery</a>
+      <a href="{{ url('/reviews') }}">Customer reviews</a>
+    </div>
+    <div class="topbar-right">
+      <div class="lang-switch">
+        <a href="?lang=en" class="active">EN</a>
+        <span>|</span>
+        <a href="?lang=bn">বাং</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Header -->
+<header class="main-header">
+  <div class="container">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="{{ url('/') }}" class="site-logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Gramer Dokan" onerror="this.style.display='none'">
+        <div class="logo-text">
+          <span class="name">Gramer Dokan</span>
+          <span class="tagline">গ্রামের স্বাদ, আপনার ঘরে</span>
+        </div>
+      </a>
+
+      <!-- Search -->
+      <div class="header-search">
+        <form class="search-form" action="{{ url('/search') }}" method="GET">
+          <input type="text" name="q" placeholder="Search Product here..." value="{{ request('q') }}">
+          <button type="submit" class="search-btn">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Phone -->
+      <div class="header-phone">
+        <span class="label">Call or WhatsApp</span>
+        <a href="tel:+8801341696476" class="number">+880 1341 696 476</a>
+      </div>
+
+      <!-- Icon Actions -->
+      <div class="header-actions">
+        <a href="{{ url('/wishlist') }}" class="icon-btn" title="Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count">0</span>
+        </a>
+        <a href="{{ url('/track') }}" class="icon-btn" title="Track Parcel">
+          <i class="fas fa-truck"></i>
+        </a>
+        @auth
+          <a href="{{ url('/account') }}" class="icon-btn" title="My Account">
+            <i class="far fa-user"></i>
+          </a>
+        @else
+          <a href="{{ url('/login') }}" class="icon-btn" title="Sign In">
+            <i class="far fa-user"></i>
+          </a>
+        @endauth
+
+        <!-- Cart -->
+        <a href="{{ url('/cart') }}" class="cart-btn">
+          <span class="cart-icon"><i class="fas fa-shopping-cart"></i></span>
+          <div class="cart-label">
+            <small>Shopping</small>
+            Cart
+          </div>
+          <span class="badge-count">{{ session('cart_count', 0) }}</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="{{ url('/category/honey') }}" class="nav-link {{ request()->is('category/honey*') ? 'active' : '' }}">
+          <span class="icon">🍯</span> Honey
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/dates') }}" class="nav-link {{ request()->is('category/dates*') ? 'active' : '' }}">
+          <span class="icon">🌴</span> Dates
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/spices') }}" class="nav-link {{ request()->is('category/spices*') ? 'active' : '' }}">
+          <span class="icon">🌶️</span> Spices
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/nuts') }}" class="nav-link {{ request()->is('category/nuts*') ? 'active' : '' }}">
+          <span class="icon">🥜</span> Nuts & Seeds
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/beverage') }}" class="nav-link {{ request()->is('category/beverage*') ? 'active' : '' }}">
+          <span class="icon">☕</span> Beverage
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/mango') }}" class="nav-link {{ request()->is('category/mango*') ? 'active' : '' }}">
+          <span class="icon">🥭</span> Mango
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/rice') }}" class="nav-link {{ request()->is('category/rice*') ? 'active' : '' }}">
+          <span class="icon">🍚</span> Rice
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/category/ghee') }}" class="nav-link {{ request()->is('category/ghee*') ? 'active' : '' }}">
+          <span class="icon">🧈</span> Ghee & Oil
+        </a>
+      </li>
+    </ul>
+
+    <div class="navbar-extras">
+      <a href="{{ url('/corporate') }}" class="extra-btn">
+        <i class="fas fa-briefcase"></i> Corporate Gift
+      </a>
+      <a href="{{ url('/track') }}" class="extra-btn">
+        <i class="fas fa-map-marker-alt"></i> Track Parcel
+      </a>
+    </div>
+  </div>
+</nav>
