@@ -226,6 +226,37 @@
   }
 }
 
+// -------- Responsive --------
+@media (max-width: $bp-lg) {
+  .product-grid {
+    &--5 { grid-template-columns: repeat(4, 1fr); }
+    &--6 { grid-template-columns: repeat(4, 1fr); }
+  }
+}
+
+@media (max-width: $bp-md) {
+  .product-grid {
+    &--4 { grid-template-columns: repeat(2, 1fr); }
+    &--5 { grid-template-columns: repeat(2, 1fr); }
+    &--6 { grid-template-columns: repeat(3, 1fr); }
+    &--8 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .top-selling .product-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .product-carousel .pc-arrow {
+    &--prev { left: -4px; }
+    &--next { right: -4px; }
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .product-grid {
+    &--5,
+    &--6 { grid-template-columns: repeat(2, 1fr); }
+  }
+}
+
 // -------- Centered section title for "Top Selling Products" --------
 .section-center-title {
   text-align: center;

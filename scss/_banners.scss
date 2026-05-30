@@ -95,3 +95,19 @@
     }
   }
 }
+
+// -------- Responsive --------
+@media (max-width: $bp-md) {
+  .promo-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 14px 16px;
+    gap: 10px;
+    min-height: auto;
+
+    &__text  { font-size: 13px; }
+    &__brand { justify-content: center; }
+
+    &--order .promo-banner__text { text-align: center; }
+  }
+}

@@ -253,3 +253,31 @@
     }
   }
 }
+
+// -------- Responsive --------
+@media (max-width: $bp-lg) {
+  .hero__grid { grid-template-columns: 1fr 220px; }
+  .featured-cat__grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+@media (max-width: $bp-md) {
+  .hero {
+    padding: 10px 0 6px;
+
+    &__grid { grid-template-columns: 1fr; }
+    &__side { display: none; }
+  }
+
+  .featured-cat__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: $bp-sm) {
+  .featured-cat__grid { grid-template-columns: repeat(3, 1fr); }
+
+  .cat-pill {
+    font-size: 12px;
+    padding: 6px 10px 6px 6px;
+
+    &__icon { width: 26px; height: 26px; }
+  }
+}
