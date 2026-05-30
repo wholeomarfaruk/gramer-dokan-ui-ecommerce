@@ -86,6 +86,21 @@
         <span>Shopping Cart</span>
         <span class="cart-count" x-text="$store.cart.count">0</span>
       </a>
+
+      <!-- Mobile-only icon strip -->
+      <div class="header__mobile-actions" x-data>
+        <a href="#" class="mob-icon" title="Corporate Gift"><i class="fa-solid fa-gift"></i></a>
+        <a href="#" class="mob-icon" title="Track Parcel"><i class="fa-solid fa-truck"></i></a>
+        <a href="#" class="mob-icon" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
+        <a href="#" class="mob-icon" title="Signin"><i class="fa-regular fa-user"></i></a>
+        <a href="#" class="mob-icon mob-icon--cart" title="Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="mob-cart-badge" x-text="$store.cart.count"></span>
+        </a>
+        <button class="mob-icon mob-icon--menu" @click="$store.offcanvas.toggle()" type="button" title="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -772,6 +787,31 @@
       <span class="payments__chip">Card</span>
     </div>
   </div>
+
+  <!-- ============ BOTTOM NAV (mobile/tablet) ============ -->
+  <nav class="bottom-nav" x-data>
+    <a href="#" class="bottom-nav__item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <button class="bottom-nav__item" @click="$store.offcanvas.toggle()" type="button">
+      <i class="fa-solid fa-bars"></i>
+      <span>Menu</span>
+    </button>
+    <a href="#" class="bottom-nav__item bottom-nav__item--cart">
+      <span class="bottom-nav__badge" x-text="$store.cart.count"></span>
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>Cart</span>
+    </a>
+    <a href="#" class="bottom-nav__item">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search</span>
+    </a>
+    <a href="#" class="bottom-nav__item">
+      <i class="fa-regular fa-user"></i>
+      <span>Account</span>
+    </a>
+  </nav>
 
   <!-- ============ OFFCANVAS MENU ============ -->
   <div x-data>
