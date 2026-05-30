@@ -107,7 +107,7 @@
         <a href="#"><i class="fa-solid fa-truck"></i>Track Parcel</a>
         <a href="#"><i class="fa-regular fa-heart"></i>Wishlist</a>
         <a href="#"><i class="fa-regular fa-user"></i>Signin</a>
-        <button class="more-menu"><i class="fa-solid fa-bars"></i></button>
+        <button class="more-menu" x-data @click="$store.offcanvas.toggle()" type="button"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
   </nav>
@@ -157,8 +157,9 @@
   <!-- ============ TOP SELLING PRODUCTS ============ -->
   <section class="top-selling">
     <div class="container">
-      <div class="section-center-title">
-        <h2>Top Selling Products</h2>
+      <div class="section-title-row">
+        <h2 class="section-title">Top Selling Products</h2>
+        <a class="section-view-all" href="#">VIEW ALL ITEMS <i class="fa-solid fa-arrow-right"></i></a>
       </div>
       <div class="product-grid product-grid--horizontal" x-data="productList(8, 'Wild Sundarban Honey')">
         <template x-for="p in products" :key="p.id">
@@ -770,6 +771,153 @@
       <span class="payments__chip">Stripe</span>
       <span class="payments__chip">Card</span>
     </div>
+  </div>
+
+  <!-- ============ OFFCANVAS MENU ============ -->
+  <div x-data>
+    <!-- Backdrop -->
+    <div
+      class="offcanvas__backdrop"
+      x-show="$store.offcanvas.isOpen"
+      x-transition:enter="oc-backdrop-enter"
+      x-transition:enter-start="oc-backdrop-start"
+      x-transition:enter-end="oc-backdrop-end"
+      x-transition:leave="oc-backdrop-enter"
+      x-transition:leave-start="oc-backdrop-end"
+      x-transition:leave-end="oc-backdrop-start"
+      @click="$store.offcanvas.close()"
+      style="display:none;"
+    ></div>
+
+    <!-- Panel -->
+    <aside
+      class="offcanvas"
+      x-show="$store.offcanvas.isOpen"
+      x-transition:enter="oc-panel-enter"
+      x-transition:enter-start="oc-panel-start"
+      x-transition:enter-end="oc-panel-end"
+      x-transition:leave="oc-panel-enter"
+      x-transition:leave-start="oc-panel-end"
+      x-transition:leave-end="oc-panel-start"
+      @keydown.escape.window="$store.offcanvas.close()"
+      style="display:none;"
+    >
+      <!-- Header -->
+      <div class="offcanvas__header">
+        <a href="#" class="offcanvas__logo">
+          <img src="assets/logo.png" alt="Gramer Dokan" />
+        </a>
+        <button class="offcanvas__close" @click="$store.offcanvas.close()" type="button">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Categories -->
+      <div class="offcanvas__section">
+        <div class="offcanvas__label">Categories</div>
+        <ul class="offcanvas__nav">
+
+          <!-- Honey → sub → sub-sub -->
+          <li x-data="{ open: false }">
+            <div class="oc-item">
+              <a href="#"><span class="oc-emoji">🍯</span>Honey</a>
+              <button class="oc-trigger" @click.stop="open = !open" type="button">
+                <i class="fa-solid fa-chevron-down oc-chevron" :class="{ 'oc-chevron--open': open }"></i>
+              </button>
+            </div>
+            <ul class="oc-sub" x-show="open" x-transition style="display:none;">
+              <li><a href="#">Wild Sundarban Honey</a></li>
+              <li><a href="#">Mustard Flower Honey</a></li>
+              <!-- sub-sub -->
+              <li x-data="{ open: false }">
+                <div class="oc-item oc-item--sub">
+                  <a href="#">By Region</a>
+                  <button class="oc-trigger" @click.stop="open = !open" type="button">
+                    <i class="fa-solid fa-chevron-down oc-chevron" :class="{ 'oc-chevron--open': open }"></i>
+                  </button>
+                </div>
+                <ul class="oc-sub oc-sub--deep" x-show="open" x-transition style="display:none;">
+                  <li><a href="#">Sundarbans</a></li>
+                  <li><a href="#">Chittagong Hills</a></li>
+                  <li><a href="#">Sylhet Forest</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Dates → sub → sub-sub -->
+          <li x-data="{ open: false }">
+            <div class="oc-item">
+              <a href="#"><span class="oc-emoji">🌴</span>Dates</a>
+              <button class="oc-trigger" @click.stop="open = !open" type="button">
+                <i class="fa-solid fa-chevron-down oc-chevron" :class="{ 'oc-chevron--open': open }"></i>
+              </button>
+            </div>
+            <ul class="oc-sub" x-show="open" x-transition style="display:none;">
+              <li><a href="#">Medjool Dates</a></li>
+              <li><a href="#">Ajwa Dates</a></li>
+              <!-- sub-sub -->
+              <li x-data="{ open: false }">
+                <div class="oc-item oc-item--sub">
+                  <a href="#">Saudi Dates</a>
+                  <button class="oc-trigger" @click.stop="open = !open" type="button">
+                    <i class="fa-solid fa-chevron-down oc-chevron" :class="{ 'oc-chevron--open': open }"></i>
+                  </button>
+                </div>
+                <ul class="oc-sub oc-sub--deep" x-show="open" x-transition style="display:none;">
+                  <li><a href="#">Safawi</a></li>
+                  <li><a href="#">Mabroom</a></li>
+                  <li><a href="#">Sukkari</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Spices → sub only -->
+          <li x-data="{ open: false }">
+            <div class="oc-item">
+              <a href="#"><span class="oc-emoji">🌶️</span>Spices</a>
+              <button class="oc-trigger" @click.stop="open = !open" type="button">
+                <i class="fa-solid fa-chevron-down oc-chevron" :class="{ 'oc-chevron--open': open }"></i>
+              </button>
+            </div>
+            <ul class="oc-sub" x-show="open" x-transition style="display:none;">
+              <li><a href="#">Red Chilli Powder</a></li>
+              <li><a href="#">Turmeric Powder</a></li>
+              <li><a href="#">Cumin Seeds</a></li>
+              <li><a href="#">Biriyani Masala</a></li>
+            </ul>
+          </li>
+
+          <!-- Plain items (no sub) -->
+          <li><a class="oc-item oc-item--plain" href="#"><span class="oc-emoji">🥜</span>Nuts &amp; Seeds</a></li>
+          <li><a class="oc-item oc-item--plain" href="#"><span class="oc-emoji">☕</span>Beverage</a></li>
+          <li><a class="oc-item oc-item--plain" href="#"><span class="oc-emoji">🥭</span>Mango</a></li>
+          <li><a class="oc-item oc-item--plain" href="#"><span class="oc-emoji">🍚</span>Rice</a></li>
+          <li><a class="oc-item oc-item--plain" href="#"><span class="oc-emoji">🧈</span>Ghee &amp; Oil</a></li>
+
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="offcanvas__section">
+        <div class="offcanvas__label">Quick Links</div>
+        <ul class="offcanvas__utils">
+          <li><a href="#"><i class="fa-solid fa-gift"></i>Corporate Gift</a></li>
+          <li><a href="#"><i class="fa-solid fa-truck"></i>Track Parcel</a></li>
+          <li><a href="#"><i class="fa-regular fa-heart"></i>Wishlist</a></li>
+          <li><a href="#"><i class="fa-regular fa-user"></i>Signin</a></li>
+        </ul>
+      </div>
+
+      <!-- Social -->
+      <div class="offcanvas__social">
+        <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </aside>
   </div>
 
 </body>

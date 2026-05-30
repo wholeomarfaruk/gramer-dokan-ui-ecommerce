@@ -35,6 +35,13 @@ document.addEventListener('alpine:init', () => {
   });
 
   Alpine.store('lang', { current: 'BN' });
+
+  Alpine.store('offcanvas', {
+    isOpen: false,
+    open()   { this.isOpen = true;  document.body.style.overflow = 'hidden'; },
+    close()  { this.isOpen = false; document.body.style.overflow = ''; },
+    toggle() { this.isOpen ? this.close() : this.open(); }
+  });
 });
 
 // -------- Product list components --------

@@ -1,0 +1,265 @@
+// ============================================
+// Offcanvas Side Menu
+// ============================================
+@import "variables";
+
+// ── Alpine transition helper classes ──
+.oc-panel-enter { transition: transform 0.3s ease; }
+.oc-panel-start { transform: translateX(100%); }
+.oc-panel-end   { transform: translateX(0); }
+
+.oc-backdrop-enter { transition: opacity 0.25s ease; }
+.oc-backdrop-start { opacity: 0; }
+.oc-backdrop-end   { opacity: 1; }
+
+// ── Backdrop ──
+.offcanvas__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 998;
+}
+
+// ── Panel ──
+.offcanvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  background: $color-white;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: $bp-sm) { width: 100%; }
+}
+
+// ── Header row ──
+.offcanvas__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid $color-gray-200;
+  flex-shrink: 0;
+
+  img { height: 42px; width: auto; }
+}
+
+.offcanvas__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $color-gray-100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-gray-800;
+  font-size: 16px;
+  transition: $transition-fast;
+
+  &:hover {
+    background: $color-yellow;
+    color: $color-black;
+  }
+}
+
+// ── Section block ──
+.offcanvas__section {
+  border-bottom: 1px solid $color-gray-100;
+  padding: 14px 20px;
+}
+
+.offcanvas__label {
+  font-size: $fs-xs;
+  font-weight: $fw-bold;
+  color: $color-gray-500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+// ── Multi-level nav ──
+.offcanvas__nav {
+
+  // ── Row shared by trigger-items and plain links ──
+  .oc-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-gray-100;
+
+    // The clickable label inside a trigger row
+    > a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      padding: 10px 0;
+      font-size: $fs-base;
+      color: $color-gray-800;
+      transition: color $transition-fast;
+
+      &:hover { color: $color-yellow-dark; }
+    }
+
+    // Sub-level row (indented)
+    &--sub {
+      padding-left: 12px;
+    }
+
+    // Plain link (no chevron, no trigger)
+    &--plain {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: $fs-base;
+      color: $color-gray-800;
+      border-bottom: 1px solid $color-gray-100;
+      transition: color $transition-fast;
+
+      &:hover { color: $color-yellow-dark; }
+    }
+  }
+
+  // Remove border on last visible item
+  li:last-child > .oc-item,
+  li:last-child > a.oc-item--plain { border-bottom: 0; }
+}
+
+// ── Chevron trigger button ──
+.oc-trigger {
+  padding: 8px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-gray-400;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: color $transition-fast, background $transition-fast;
+  flex-shrink: 0;
+
+  &:hover {
+    background: $color-gray-100;
+    color: $color-yellow-dark;
+  }
+}
+
+.oc-chevron {
+  font-size: 10px;
+  transition: transform $transition-base;
+  pointer-events: none;
+
+  &--open { transform: rotate(180deg); }
+}
+
+// ── Level-1 submenu ──
+.oc-sub {
+  background: $color-gray-50;
+
+  li > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 8px 9px 20px;
+    font-size: $fs-sm;
+    color: $color-gray-700;
+    border-bottom: 1px solid rgba($color-gray-200, 0.6);
+    transition: color $transition-fast, background $transition-fast, padding-left $transition-fast;
+
+    &:hover {
+      color: $color-yellow-dark;
+      background: rgba($color-yellow, 0.07);
+      padding-left: 26px;
+    }
+  }
+
+  li:last-child > a { border-bottom: 0; }
+
+  // The trigger row inside a sub-level
+  .oc-item { border-bottom: 1px solid rgba($color-gray-200, 0.6); }
+  .oc-item > a { padding-left: 0; font-size: $fs-sm; }
+}
+
+// ── Level-2 submenu (deeper) ──
+.oc-sub--deep {
+  background: rgba($color-gray-200, 0.3);
+
+  li > a {
+    padding-left: 32px;
+    font-size: $fs-xs;
+    color: $color-gray-600;
+
+    &:hover {
+      padding-left: 38px;
+      color: $color-yellow-dark;
+      background: rgba($color-yellow, 0.06);
+    }
+  }
+}
+
+.oc-emoji {
+  font-size: 16px;
+  line-height: 1;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+// ── Utility links ──
+.offcanvas__utils {
+  li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: $fs-base;
+    color: $color-gray-800;
+    border-bottom: 1px solid $color-gray-100;
+    transition: color $transition-fast;
+
+    i {
+      width: 18px;
+      text-align: center;
+      color: $color-yellow-dark;
+      font-size: 13px;
+    }
+
+    &:hover { color: $color-yellow-dark; }
+  }
+
+  li:last-child a { border-bottom: 0; }
+}
+
+// ── Social strip ──
+.offcanvas__social {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px;
+  margin-top: auto;
+  border-top: 1px solid $color-gray-100;
+
+  a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: $color-gray-100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-gray-700;
+    font-size: 13px;
+    transition: $transition-fast;
+
+    &:hover {
+      background: $color-yellow;
+      color: $color-black;
+    }
+  }
+}
