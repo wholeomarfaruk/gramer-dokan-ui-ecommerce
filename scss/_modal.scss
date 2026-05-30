@@ -1,0 +1,124 @@
+// ============================================
+// Global Modal Shell — reusable for any content
+// Sizes: modal-panel--sm | --md | --lg | --xl | --full
+// ============================================
+@import "variables";
+
+// ── Alpine transition helpers ──
+.modal-fade-enter  { transition: opacity 0.25s ease; }
+.modal-fade-from   { opacity: 0; }
+.modal-fade-to     { opacity: 1; }
+
+.modal-scale-enter { transition: opacity 0.25s ease, transform 0.25s ease; }
+.modal-scale-from  { opacity: 0; transform: scale(0.95) translateY(-10px); }
+.modal-scale-to    { opacity: 1; transform: scale(1)    translateY(0); }
+
+// ── Backdrop ──
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}
+
+// ── Centering wrap ──
+.modal-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+// ── Panel ──
+// Developer picks size per modal:
+//   --sm   → 380px   confirm, alert
+//   --md   → 500px   auth, small forms   ← default
+//   --lg   → 700px   detail, image
+//   --xl   → 960px   large table, wizard
+//   --full → 100%    full screen
+.modal-panel {
+  background: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  position: relative;
+
+  &--sm   { max-width: 380px; }
+  &--md   { max-width: 500px; }
+  &--lg   { max-width: 700px; }
+  &--xl   { max-width: 960px; }
+  &--full { max-width: 100%; border-radius: 0; }
+}
+
+// ── Header ──
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px 0;
+  gap: 12px;
+}
+
+.modal-title {
+  font-size: $fs-lg;
+  font-weight: $fw-bold;
+  color: $color-gray-900;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $color-gray-100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-gray-600;
+  font-size: 14px;
+  border: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: $transition-fast;
+
+  &:hover { background: $color-gray-200; color: $color-gray-900; }
+}
+
+// ── Body ──
+.modal-body {
+  padding: 20px 24px 24px;
+}
+
+// ── Footer (optional action row) ──
+.modal-footer {
+  padding: 14px 24px;
+  border-top: 1px solid $color-gray-100;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+// ── Responsive — centered on all screen sizes ──
+@media (max-width: $bp-md) {
+  .modal-wrap {
+    align-items: center;
+    padding: 16px;
+  }
+
+  .modal-panel {
+    border-radius: $radius-lg;
+    max-height: calc(100vh - 32px);
+
+    &--sm,
+    &--md,
+    &--lg,
+    &--xl { max-width: 100%; }
+  }
+}

@@ -42,6 +42,26 @@ document.addEventListener('alpine:init', () => {
     close()  { this.isOpen = false; document.body.style.overflow = ''; },
     toggle() { this.isOpen ? this.close() : this.open(); }
   });
+
+  // Global modal store
+  // Usage: $store.modal.open('auth')          → opens with default 'md' size
+  //        $store.modal.open('auth', 'lg')     → opens with large panel
+  //        $store.modal.close()
+  //        $store.modal.is('auth')             → boolean
+  Alpine.store('modal', {
+    active: null,
+    size: 'md',
+    open(name, size = 'md') {
+      this.active = name;
+      this.size   = size;
+      document.body.style.overflow = 'hidden';
+    },
+    close() {
+      this.active = null;
+      document.body.style.overflow = '';
+    },
+    is(name) { return this.active === name; }
+  });
 });
 
 // -------- Product list components --------

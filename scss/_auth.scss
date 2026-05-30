@@ -1,0 +1,193 @@
+// ============================================
+// Auth Component — Sign In & Register
+// Used inside the global modal shell (_modal.scss)
+// ============================================
+@import "variables";
+
+// ── Tab switcher (Sign In / Register) ──
+.modal-tabs {
+  display: flex;
+  gap: 4px;
+  background: $color-gray-100;
+  border-radius: $radius-md;
+  padding: 4px;
+  flex: 1;
+}
+
+.modal-tab {
+  flex: 1;
+  padding: 7px 18px;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  color: $color-gray-500;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  transition: $transition-fast;
+
+  &.is-active {
+    background: $color-white;
+    color: $color-gray-900;
+    box-shadow: $shadow-sm;
+  }
+
+  &:hover:not(.is-active) { color: $color-gray-800; }
+}
+
+// ── Auth form wrapper ──
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+// ── Field group ──
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  > label {
+    font-size: 11px;
+    font-weight: $fw-bold;
+    color: $color-gray-600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ── Two fields side by side (phone + email in register) ──
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  @media (max-width: $bp-sm) { grid-template-columns: 1fr; }
+}
+
+// ── Input with leading icon ──
+.form-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  > i {
+    position: absolute;
+    left: 12px;
+    color: $color-gray-400;
+    font-size: 13px;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px 0 36px;
+    border: 1.5px solid $color-gray-200;
+    border-radius: $radius-md;
+    font-size: $fs-base;
+    color: $color-gray-900;
+    background: $color-white;
+    transition: border-color $transition-fast;
+
+    &::placeholder { color: $color-gray-400; }
+    &:focus { border-color: $color-yellow; outline: none; }
+  }
+}
+
+// ── Remember me + forgot link row ──
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $fs-sm;
+  color: $color-gray-600;
+  cursor: pointer;
+
+  input[type="checkbox"] { accent-color: $color-yellow; }
+}
+
+.forgot-link {
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  color: $color-yellow-dark;
+
+  &:hover { text-decoration: underline; }
+}
+
+// ── Submit button ──
+.btn-auth {
+  width: 100%;
+  height: 44px;
+  background: $color-yellow;
+  color: $color-black;
+  font-size: $fs-base;
+  font-weight: $fw-bold;
+  border: 0;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: background $transition-fast;
+  margin-top: 4px;
+
+  &:hover { background: $color-yellow-dark; }
+}
+
+// ── "or continue with" divider ──
+.auth-divider {
+  text-align: center;
+  position: relative;
+  font-size: $fs-xs;
+  color: $color-gray-400;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 56px);
+    height: 1px;
+    background: $color-gray-200;
+  }
+  &::before { left: 0; }
+  &::after  { right: 0; }
+}
+
+// ── Social login buttons ──
+.social-auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.social-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  border-radius: $radius-md;
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  cursor: pointer;
+  border: 1.5px solid $color-gray-200;
+  background: $color-white;
+  transition: $transition-fast;
+
+  &--google {
+    color: #4285F4;
+    &:hover { background: #f0f4ff; border-color: #4285F4; }
+  }
+
+  &--facebook {
+    color: #1877F2;
+    &:hover { background: #f0f5ff; border-color: #1877F2; }
+  }
+}
