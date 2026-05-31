@@ -1,0 +1,732 @@
+// ============================================
+// Checkout Page
+// ============================================
+@import "variables";
+
+// ── Page hero / breadcrumb ──
+.co-hero {
+  text-align: center;
+  padding: $space-6 0 $space-5;
+  border-bottom: 1px solid $color-gray-200;
+  background: $color-white;
+
+  h1 {
+    font-size: $fs-3xl;
+    font-weight: $fw-bold;
+    color: $color-gray-900;
+    margin-bottom: $space-2;
+  }
+}
+
+.co-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $fs-sm;
+  color: $color-gray-500;
+
+  a {
+    color: $color-gray-700;
+    &:hover { color: $color-yellow-dark; }
+  }
+
+  i { font-size: 9px; color: $color-gray-400; }
+  span { color: $color-yellow-dark; font-weight: $fw-semibold; }
+}
+
+// ── Main layout ──
+.co-main {
+  background: $color-gray-50;
+  padding: $space-6 0 $space-10;
+  min-height: 60vh;
+}
+
+.co-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: $space-5;
+  align-items: start;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Section card ──
+.co-card {
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: $radius-md;
+  margin-bottom: $space-4;
+  overflow: hidden;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.co-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 20px;
+  border-bottom: 1px solid $color-gray-200;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: $fs-md;
+    font-weight: $fw-bold;
+    color: $color-gray-900;
+    margin: 0;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: $color-yellow;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.co-card__body {
+  padding: $space-5;
+}
+
+// ── Login banner ──
+.co-login-banner {
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: $radius-md;
+  padding: 11px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-4;
+
+  p {
+    font-size: $fs-base;
+    color: $color-gray-700;
+
+    a {
+      color: $color-yellow-dark;
+      font-weight: $fw-semibold;
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: $bp-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.co-btn-login {
+  padding: 6px 18px;
+  border: 1.5px solid $color-gray-300;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  color: $color-gray-700;
+  background: $color-white;
+  cursor: pointer;
+  transition: border-color $transition-fast, color $transition-fast;
+
+  &:hover { border-color: $color-yellow-dark; color: $color-yellow-dark; }
+}
+
+.co-btn-register {
+  padding: 6px 18px;
+  border: 1.5px solid $color-yellow;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  color: $color-black;
+  background: $color-yellow;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover { background: $color-yellow-dark; border-color: $color-yellow-dark; }
+}
+
+// ── Order review — product row ──
+.co-item {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding-bottom: $space-4;
+  margin-bottom: $space-4;
+  border-bottom: 1px solid $color-gray-100;
+
+  &__img {
+    width: 58px;
+    height: 58px;
+    border-radius: $radius-md;
+    object-fit: cover;
+    border: 1px solid $color-gray-200;
+    flex-shrink: 0;
+    background: $color-gray-50;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: $fs-base;
+    font-weight: $fw-semibold;
+    color: $color-gray-900;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__qty-row {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__qty-label {
+    font-size: $fs-sm;
+    color: $color-gray-600;
+    font-weight: $fw-medium;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid $color-gray-300;
+    border-radius: $radius-sm;
+    overflow: hidden;
+  }
+
+  &__qty-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-gray-100;
+    border: none;
+    cursor: pointer;
+    font-size: $fs-md;
+    color: $color-gray-700;
+    line-height: 1;
+    transition: background $transition-fast;
+
+    &:hover { background: $color-yellow; }
+  }
+
+  &__qty-val {
+    width: 32px;
+    text-align: center;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-gray-900;
+    border-left: 1px solid $color-gray-300;
+    border-right: 1px solid $color-gray-300;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__price {
+    font-size: $fs-base;
+    font-weight: $fw-bold;
+    color: $color-gray-900;
+  }
+
+  &__del {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: $radius-sm;
+    background: rgba($color-red, 0.08);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-red;
+    font-size: $fs-base;
+    transition: background $transition-fast;
+
+    &:hover { background: $color-red; color: $color-white; }
+  }
+}
+
+// ── Combo box ──
+.co-combo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: $color-yellow;
+  color: $color-black;
+  font-size: $fs-xs;
+  font-weight: $fw-black;
+  padding: 3px 9px;
+  border-radius: $radius-sm;
+  letter-spacing: 0.5px;
+}
+
+.co-combo {
+  border: 1px solid $color-gray-200;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: $color-gray-50;
+    border-bottom: 1px solid $color-gray-200;
+  }
+
+  &__title {
+    font-size: $fs-base;
+    font-weight: $fw-bold;
+    color: $color-gray-900;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-bottom: 1px solid $color-gray-100;
+
+    &:last-of-type { border-bottom: 0; }
+
+    &__img {
+      width: 34px;
+      height: 34px;
+      object-fit: cover;
+      border-radius: $radius-sm;
+      border: 1px solid $color-gray-200;
+      flex-shrink: 0;
+      background: $color-gray-50;
+    }
+
+    &__name {
+      flex: 1;
+      font-size: $fs-sm;
+      color: $color-gray-800;
+    }
+
+    &__price {
+      font-size: $fs-sm;
+      font-weight: $fw-semibold;
+      color: #2e7d32;
+      flex-shrink: 0;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: $color-gray-50;
+    border-top: 1px solid $color-gray-200;
+
+    .label {
+      font-size: $fs-base;
+      font-weight: $fw-semibold;
+      color: $color-yellow-dark;
+    }
+
+    .amount {
+      font-size: $fs-md;
+      font-weight: $fw-bold;
+      color: $color-yellow-dark;
+    }
+  }
+}
+
+// ── Form elements ──
+.co-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+  margin-bottom: $space-4;
+
+  @media (max-width: $bp-sm) { grid-template-columns: 1fr; }
+}
+
+.co-form-row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+
+  @media (max-width: $bp-md) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: $bp-sm) { grid-template-columns: 1fr; }
+}
+
+.co-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: $space-4;
+
+  &:last-child { margin-bottom: 0; }
+
+  label {
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-gray-700;
+  }
+}
+
+.co-input {
+  height: 40px;
+  border: 1px solid $color-gray-300;
+  border-radius: $radius-sm;
+  padding: 0 12px;
+  font-size: $fs-base;
+  color: $color-gray-800;
+  background: $color-white;
+  width: 100%;
+  transition: border-color $transition-fast;
+
+  &:focus { outline: none; border-color: $color-yellow; box-shadow: 0 0 0 3px rgba($color-yellow, 0.15); }
+  &::placeholder { color: $color-gray-400; }
+}
+
+.co-select {
+  height: 40px;
+  border: 1px solid $color-gray-300;
+  border-radius: $radius-sm;
+  padding: 0 32px 0 12px;
+  font-size: $fs-base;
+  color: $color-gray-700;
+  background: $color-white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:focus { outline: none; border-color: $color-yellow; box-shadow: 0 0 0 3px rgba($color-yellow, 0.15); }
+}
+
+.co-phone-wrap {
+  display: flex;
+  border: 1px solid $color-gray-300;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &:focus-within {
+    border-color: $color-yellow;
+    box-shadow: 0 0 0 3px rgba($color-yellow, 0.15);
+  }
+
+  .prefix {
+    padding: 0 12px;
+    background: $color-gray-100;
+    border-right: 1px solid $color-gray-300;
+    display: flex;
+    align-items: center;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-gray-600;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  input {
+    flex: 1;
+    height: 38px;
+    border: none;
+    padding: 0 12px;
+    font-size: $fs-base;
+    color: $color-gray-800;
+    background: transparent;
+    width: 100%;
+
+    &:focus { outline: none; }
+    &::placeholder { color: $color-gray-400; }
+  }
+}
+
+// Billing same-as-shipping toggle
+.co-same-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: $fs-sm;
+  color: $color-gray-600;
+
+  .co-same-indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: $color-yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: $color-black;
+    flex-shrink: 0;
+    transition: background $transition-fast;
+  }
+
+  &.is-unchecked .co-same-indicator {
+    background: $color-gray-200;
+    color: $color-gray-400;
+  }
+}
+
+// ── Payment methods ──
+.co-payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.co-pm {
+  border: 1.5px solid $color-gray-200;
+  border-radius: $radius-md;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color $transition-fast, background $transition-fast;
+  position: relative;
+
+  &.is-active {
+    border-color: $color-yellow;
+    background: rgba($color-yellow, 0.06);
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: $color-gray-700;
+  }
+
+  &__label {
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $color-gray-800;
+    flex: 1;
+  }
+
+  &__check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $color-yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: $color-black;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &.is-active &__check { opacity: 1; }
+}
+
+.co-pm--full {
+  grid-column: span 1;
+}
+
+// ── Coupon accordion ──
+.co-coupon__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 20px;
+  cursor: pointer;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+
+  span {
+    font-size: $fs-base;
+    font-weight: $fw-semibold;
+    color: $color-gray-800;
+  }
+
+  i {
+    font-size: 12px;
+    color: $color-gray-500;
+    transition: transform $transition-fast;
+  }
+
+  &.is-open i { transform: rotate(180deg); }
+}
+
+.co-coupon__body {
+  padding: $space-4 $space-5;
+  border-top: 1px solid $color-gray-100;
+  display: flex;
+  gap: 10px;
+
+  input {
+    flex: 1;
+    height: 38px;
+    border: 1px solid $color-gray-300;
+    border-radius: $radius-sm;
+    padding: 0 12px;
+    font-size: $fs-base;
+    color: $color-gray-800;
+
+    &:focus { outline: none; border-color: $color-yellow; }
+    &::placeholder { color: $color-gray-400; }
+  }
+
+  button {
+    padding: 0 20px;
+    height: 38px;
+    background: $color-yellow;
+    border: none;
+    border-radius: $radius-sm;
+    font-size: $fs-sm;
+    font-weight: $fw-bold;
+    color: $color-black;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background $transition-fast;
+
+    &:hover { background: $color-yellow-dark; }
+  }
+}
+
+// ── Order summary ──
+.co-summary {
+  padding: $space-5;
+}
+
+.co-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  font-size: $fs-base;
+  color: $color-gray-700;
+  border-bottom: 1px solid $color-gray-100;
+
+  &:last-child { border-bottom: 0; }
+
+  .label { }
+  .value { font-weight: $fw-semibold; color: $color-gray-900; }
+}
+
+.co-summary-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 0;
+  margin-top: 4px;
+  border-top: 2px solid $color-gray-200;
+  font-size: $fs-md;
+  font-weight: $fw-bold;
+  color: $color-gray-900;
+}
+
+// ── Special notes ──
+.co-notes {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid $color-gray-300;
+  border-radius: $radius-sm;
+  padding: 10px 12px;
+  font-size: $fs-base;
+  color: $color-gray-800;
+  resize: vertical;
+  font-family: $font-en;
+  line-height: 1.5;
+  transition: border-color $transition-fast;
+
+  &:focus { outline: none; border-color: $color-yellow; box-shadow: 0 0 0 3px rgba($color-yellow, 0.12); }
+  &::placeholder { color: $color-gray-400; }
+}
+
+.co-notes-count {
+  font-size: $fs-xs;
+  color: $color-gray-500;
+  margin-top: 4px;
+  text-align: right;
+}
+
+// ── Terms checkbox ──
+.co-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: $space-4 $space-5;
+  border-top: 1px solid $color-gray-100;
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: $color-yellow;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: $fs-sm;
+    color: $color-gray-600;
+    line-height: 1.5;
+    cursor: pointer;
+
+    a {
+      color: $color-yellow-dark;
+      font-weight: $fw-semibold;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+// ── Place order button ──
+.co-place-order {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: $color-yellow;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: $fs-base;
+  font-weight: $fw-black;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $color-black;
+  cursor: pointer;
+  text-align: center;
+  transition: background $transition-fast, transform $transition-fast;
+  margin-bottom: $space-4;
+
+  &:hover {
+    background: $color-yellow-dark;
+    transform: translateY(-1px);
+  }
+
+  &:active { transform: translateY(0); }
+}

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Gramer Dokan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ============ TOP UTILITY BAR ============ -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__social">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
+        <span class="sep"></span>
+        <a href="#"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+        <span class="sep"></span>
+        <a href="#"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
+        <span class="sep"></span>
+        <a href="#"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
+      </div>
+      <div class="topbar__links" x-data>
+        <a href="index.html">Home</a><span class="sep">|</span>
+        <a href="#">About us</a><span class="sep">|</span>
+        <a href="#">Contact us</a><span class="sep">|</span>
+        <a href="#">Gallery</a><span class="sep">|</span>
+        <a href="#">Customer reviews</a><span class="sep">|</span>
+        <div class="lang-toggle">
+          <span class="lang-label" :class="$store.lang.current==='EN' && 'active'">EN</span>
+          <button class="toggle-switch" :class="$store.lang.current==='BN' && 'active'"
+            @click="$store.lang.current = $store.lang.current==='EN' ? 'BN' : 'EN'" type="button"></button>
+          <span class="lang-label" :class="$store.lang.current==='BN' && 'active'">BN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN HEADER ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="assets/logo.png" alt="Gramer Dokan" class="logo-img" />
+      </a>
+      <div class="header__search">
+        <input type="text" placeholder="Search ..." />
+        <div class="search-icons">
+          <button title="Voice search"><i class="fa-solid fa-microphone"></i></button>
+          <button title="Image search"><i class="fa-solid fa-camera"></i></button>
+          <button title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </div>
+      <div class="header__call">
+        <span class="call-icon"><i class="fa-solid fa-phone"></i></span>
+        <div class="call-text">
+          <div class="label">Call or Whatsapp</div>
+          <div class="number">+8801341696475</div>
+        </div>
+      </div>
+      <a href="#" class="header__cart" x-data @click.prevent="$store.cart.toggle()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Shopping Cart</span>
+        <span class="cart-count" x-text="$store.cart.count">0</span>
+      </a>
+      <div class="header__mobile-actions" x-data>
+        <a href="#" class="mob-icon" title="Track Parcel"><i class="fa-solid fa-truck"></i></a>
+        <a href="#" class="mob-icon" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
+        <a href="#" class="mob-icon" title="Signin" @click.prevent="$store.modal.open('auth')"><i class="fa-regular fa-user"></i></a>
+        <a href="#" class="mob-icon mob-icon--cart" title="Cart" @click.prevent="$store.cart.toggle()">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="mob-cart-badge" x-text="$store.cart.count"></span>
+        </a>
+        <button class="mob-icon mob-icon--menu" @click="$store.offcanvas.toggle()" type="button">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ YELLOW MAIN NAV ============ -->
+  <nav class="mainnav">
+    <div class="container mainnav__inner">
+      <ul class="mainnav__categories">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Honey</a></li>
+        <li><a href="#">Dates</a></li>
+        <li><a href="#">Spices</a></li>
+        <li><a href="#">Mango</a></li>
+        <li><a href="#">Rice</a></li>
+        <li><a href="#">Ghee &amp; Oil</a></li>
+        <li><a href="#">Beverage</a></li>
+      </ul>
+      <div class="mainnav__utilities">
+        <a href="#"><i class="fa-solid fa-truck"></i>Track Parcel</a>
+        <a href="#"><i class="fa-regular fa-heart"></i>Wishlist</a>
+        <a href="#" x-data @click.prevent="$store.modal.open('auth')"><i class="fa-regular fa-user"></i>Signin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ CHECKOUT HERO ============ -->
+  <div class="co-hero">
+    <div class="container">
+      <h1>Checkout</h1>
+      <nav class="co-breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Checkout</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============ CHECKOUT MAIN ============ -->
+  <main class="co-main"
+    x-data="{
+      payMethod: 'cod',
+      sameAsShipping: true,
+      couponOpen: true,
+      notes: '',
+      agreed: false,
+      qty: 1,
+      unitPrice: 1700,
+      comboTotal: 3000,
+      get subtotal() { return (this.qty * this.unitPrice) + this.comboTotal; },
+      get delivery() { return 0; },
+      get total() { return this.subtotal + this.delivery; },
+      formatPrice(n) { return '৳' + n.toLocaleString('en-US', { minimumFractionDigits: 2 }); },
+      updateQty(d) { const n = this.qty + d; if (n >= 1) this.qty = n; }
+    }">
+    <div class="container">
+      <div class="co-grid">
+
+        <!-- ── LEFT COLUMN ── -->
+        <div class="co-left">
+
+          <!-- Login banner -->
+          <div class="co-login-banner">
+            <p>Have any account? please <a href="#" @click.prevent="$store.modal.open('auth')">login</a> or <a href="#" @click.prevent="$store.modal.open('auth')">register</a></p>
+            <div class="co-login-banner__btns">
+              <button class="co-btn-login" type="button" @click="$store.modal.open('auth')">Login</button>
+              <button class="co-btn-register" type="button" @click="$store.modal.open('auth')">Register</button>
+            </div>
+          </div>
+
+          <!-- Order review -->
+          <div class="co-card">
+            <div class="co-card__head">
+              <h2>Order review</h2>
+            </div>
+            <div class="co-card__body">
+
+              <!-- Product item -->
+              <div class="co-item">
+                <img src="assets/products/product-1.svg" alt="Gawa Ghee 1kg" class="co-item__img" />
+                <div class="co-item__info">
+                  <div class="co-item__name">Gawa Ghee 1kg</div>
+                  <div class="co-item__qty-row">
+                    <span class="co-item__qty-label">Qty:</span>
+                    <div class="co-item__controls">
+                      <button class="co-item__qty-btn" @click="updateQty(-1)" type="button">−</button>
+                      <span class="co-item__qty-val" x-text="qty">1</span>
+                      <button class="co-item__qty-btn" @click="updateQty(1)" type="button">+</button>
+                    </div>
+                    <span class="co-item__price" x-text="formatPrice(qty * unitPrice)">৳1,700.00</span>
+                  </div>
+                </div>
+                <button class="co-item__del" type="button" title="Remove item">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+
+              <!-- Combo -->
+              <div class="co-combo">
+                <div class="co-combo__header">
+                  <span class="co-combo-badge">IT COMBO</span>
+                  <span class="co-combo__title">EID Masala combo</span>
+                </div>
+                <div class="co-combo__row">
+                  <img src="assets/products/product-2.svg" alt="Shahi Masala" class="co-combo__row__img" />
+                  <span class="co-combo__row__name">Shahi Masala 250gm × 1</span>
+                  <span class="co-combo__row__price">৳681.82</span>
+                </div>
+                <div class="co-combo__row">
+                  <img src="assets/products/product-3.svg" alt="Kala Bhuna Masala" class="co-combo__row__img" />
+                  <span class="co-combo__row__name">Kala Bhuna Masala-250gm × 1</span>
+                  <span class="co-combo__row__price">৳681.82</span>
+                </div>
+                <div class="co-combo__row">
+                  <img src="assets/products/product-4.svg" alt="Cinnamon" class="co-combo__row__img" />
+                  <span class="co-combo__row__name">Cinnamon 200g × 1</span>
+                  <span class="co-combo__row__price">৳363.64</span>
+                </div>
+                <div class="co-combo__row">
+                  <img src="assets/products/product-1.svg" alt="Cardamom" class="co-combo__row__img" />
+                  <span class="co-combo__row__name">Cardamom 100g × 1</span>
+                  <span class="co-combo__row__price">৳681.82</span>
+                </div>
+                <div class="co-combo__row">
+                  <img src="assets/products/product-2.svg" alt="Clove" class="co-combo__row__img" />
+                  <span class="co-combo__row__name">Clove 200g × 1</span>
+                  <span class="co-combo__row__price">৳590.91</span>
+                </div>
+                <div class="co-combo__footer">
+                  <span class="label">Combo Total</span>
+                  <span class="amount">৳3,000.00</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Shipping Address -->
+          <div class="co-card">
+            <div class="co-card__head">
+              <h2>Shipping Address</h2>
+            </div>
+            <div class="co-card__body">
+
+              <div class="co-form-row">
+                <div class="co-form-group" style="margin-bottom:0">
+                  <input class="co-input" type="text" placeholder="Your Full Name *" value="MD. Omar Faruk" />
+                </div>
+                <div class="co-form-group" style="margin-bottom:0">
+                  <div class="co-phone-wrap">
+                    <span class="prefix">88</span>
+                    <input type="tel" placeholder="01XXXXXXXXX" value="01684285963" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="co-form-group">
+                <input class="co-input" type="text" placeholder="House no / building / street / area *" value="demra" />
+              </div>
+
+              <div class="co-form-row" style="margin-bottom:0">
+                <div class="co-form-group" style="margin-bottom:0">
+                  <select class="co-select">
+                    <option value="">Select District</option>
+                    <option>Dhaka</option>
+                    <option>Chittagong</option>
+                    <option>Rajshahi</option>
+                    <option>Khulna</option>
+                    <option>Sylhet</option>
+                    <option>Barisal</option>
+                    <option>Rangpur</option>
+                    <option>Mymensingh</option>
+                    <option>Satkhira</option>
+                  </select>
+                </div>
+                <div class="co-form-group" style="margin-bottom:0">
+                  <select class="co-select">
+                    <option value="">Select Thana (Optional)</option>
+                    <option>Demra</option>
+                    <option>Motijheel</option>
+                    <option>Gulshan</option>
+                    <option>Mirpur</option>
+                    <option>Uttara</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Billing Address -->
+          <div class="co-card">
+            <div class="co-card__head">
+              <h2>Billing Address</h2>
+              <button
+                type="button"
+                class="co-same-check"
+                :class="sameAsShipping ? '' : 'is-unchecked'"
+                @click="sameAsShipping = !sameAsShipping"
+              >
+                <span class="co-same-indicator">
+                  <i class="fa-solid fa-check"></i>
+                </span>
+                <span>Same as shipping</span>
+              </button>
+            </div>
+
+            <div class="co-card__body" x-show="!sameAsShipping" style="display:none;">
+
+              <div class="co-form-row">
+                <div class="co-form-group" style="margin-bottom:0">
+                  <input class="co-input" type="text" placeholder="Your Full Name *" />
+                </div>
+                <div class="co-form-group" style="margin-bottom:0">
+                  <div class="co-phone-wrap">
+                    <span class="prefix">88</span>
+                    <input type="tel" placeholder="01XXXXXXXXX" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="co-form-row co-form-row--3" style="margin-bottom:16px">
+                <div class="co-form-group" style="margin-bottom:0">
+                  <select class="co-select">
+                    <option value="">Select Country</option>
+                    <option selected>Bangladesh</option>
+                  </select>
+                </div>
+                <div class="co-form-group" style="margin-bottom:0">
+                  <select class="co-select">
+                    <option value="">Select District</option>
+                    <option>Dhaka</option>
+                    <option>Chittagong</option>
+                    <option>Satkhira</option>
+                  </select>
+                </div>
+                <div class="co-form-group" style="margin-bottom:0">
+                  <select class="co-select">
+                    <option value="">Select Thana (Optional)</option>
+                    <option>Demra</option>
+                    <option>Motijheel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="co-form-group" style="margin-bottom:0">
+                <input class="co-input" type="text" placeholder="ex. House no / building / street / area" />
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- /co-left -->
+
+        <!-- ── RIGHT COLUMN ── -->
+        <div class="co-right">
+
+          <!-- Payment method -->
+          <div class="co-card">
+            <div class="co-card__head">
+              <h2>Payment method</h2>
+            </div>
+            <div class="co-card__body">
+              <div class="co-payment-grid">
+
+                <div class="co-pm" :class="payMethod === 'cod' && 'is-active'" @click="payMethod = 'cod'">
+                  <span class="co-pm__icon"><i class="fa-solid fa-money-bill-wave" style="color:#4CAF50"></i></span>
+                  <span class="co-pm__label">Cash On Delivery</span>
+                  <span class="co-pm__check"><i class="fa-solid fa-check"></i></span>
+                </div>
+
+                <div class="co-pm" :class="payMethod === 'online' && 'is-active'" @click="payMethod = 'online'">
+                  <span class="co-pm__icon"><i class="fa-solid fa-credit-card" style="color:#1565C0"></i></span>
+                  <span class="co-pm__label">Online Payment</span>
+                  <span class="co-pm__check"><i class="fa-solid fa-check"></i></span>
+                </div>
+
+                <div class="co-pm co-pm--full" :class="payMethod === 'bkash' && 'is-active'" @click="payMethod = 'bkash'">
+                  <span class="co-pm__icon" style="font-weight:900;font-size:14px;color:#E2136E;">bKash</span>
+                  <span class="co-pm__label">bKash Mobile Payment</span>
+                  <span class="co-pm__check"><i class="fa-solid fa-check"></i></span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Coupon -->
+          <div class="co-card">
+            <button
+              class="co-coupon__toggle"
+              :class="couponOpen && 'is-open'"
+              @click="couponOpen = !couponOpen"
+              type="button"
+            >
+              <span>Have any coupon or gift voucher?</span>
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+            <div class="co-coupon__body" x-show="couponOpen" style="display:none;" x-transition>
+              <input type="text" placeholder="Enter Coupon" />
+              <button type="button">Apply coupon</button>
+            </div>
+          </div>
+
+          <!-- Order summary -->
+          <div class="co-card">
+            <div class="co-summary">
+              <div class="co-summary-row">
+                <span class="label">Sub total</span>
+                <span class="value" x-text="subtotal.toLocaleString('en-US', {minimumFractionDigits: 2}) + ' BDT'">4,700.00 BDT</span>
+              </div>
+              <div class="co-summary-row">
+                <span class="label">Delivery cost</span>
+                <span class="value">0 BDT</span>
+              </div>
+            </div>
+            <div class="co-summary-total" style="padding: 10px 20px 16px; border-top: 2px solid #eee; margin: 0 20px;">
+              <span>Total</span>
+              <span x-text="total.toLocaleString('en-US', {minimumFractionDigits: 2}) + 'BDT'">4700.00BDT</span>
+            </div>
+          </div>
+
+          <!-- Special notes -->
+          <div class="co-card">
+            <div class="co-card__head">
+              <h2>Special notes <small style="font-size:11px;font-weight:400;color:#9E9E9E;">(Optional)</small></h2>
+            </div>
+            <div class="co-card__body">
+              <textarea
+                class="co-notes"
+                placeholder="Write your special note here..."
+                x-model="notes"
+                maxlength="90"
+              ></textarea>
+              <div class="co-notes-count" x-text="notes.length + ' / 90 characters'">0 / 90 characters</div>
+            </div>
+          </div>
+
+          <!-- Terms + Place Order -->
+          <div class="co-card">
+            <div class="co-terms">
+              <input type="checkbox" id="co-agree" x-model="agreed" />
+              <label for="co-agree">
+                I have read and agree to the
+                <a href="#">Terms and Conditions</a>,
+                <a href="#">Privacy Policy</a>
+                &amp;
+                <a href="#">Refund and Return Policy</a>.
+              </label>
+            </div>
+            <div style="padding: 0 20px 20px;">
+              <button
+                class="co-place-order"
+                type="button"
+                :disabled="!agreed"
+                :style="!agreed ? 'opacity:0.6;cursor:not-allowed;' : ''"
+              >
+                Place Order
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /co-right -->
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ MAIN FOOTER ============ -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-wrap">
+            <img src="assets/logo.png" alt="Gramer Dokan" class="logo-img" />
+          </div>
+          <p>Gramer Dokan is an e-commerce platform focused on delivering safe, reliable, and authentic village-inspired food products to your doorstep.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Important Links</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Delivery Policy</a></li>
+            <li><a href="#">Terms &amp; Condition</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">Corporate Deal</a></li>
+            <li><a href="#">Tracking Order</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Support Center</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact us</h4>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="ci-info">
+              <small>Call or WhatsApp</small>
+              <span><a href="tel:+8801341696475">+88 01341 696 475</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="ci-info">
+              <small>Email address</small>
+              <span><a href="mailto:contact@gramerdokan.com.bd">contact@gramerdokan.com.bd</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-warehouse"></i></div>
+            <div class="ci-info">
+              <small>Warehouse</small>
+              <span>Kalaroa, Satkhira</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 <span>Gramer Dokan</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="payments">
+    <div class="container">
+      <div class="payments__scroll">
+        <img src="uploads/payment-gateway.jpg" alt="Payment Methods" class="payments__img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ GLOBAL MODAL SYSTEM ============ -->
+  <div x-data @keydown.escape.window="$store.modal.close()">
+    <div class="modal-backdrop" x-show="$store.modal.active !== null"
+      x-transition:enter="modal-fade-enter" x-transition:enter-start="modal-fade-from" x-transition:enter-end="modal-fade-to"
+      x-transition:leave="modal-fade-enter" x-transition:leave-start="modal-fade-to" x-transition:leave-end="modal-fade-from"
+      @click="$store.modal.close()" style="display:none;"></div>
+    <div class="modal-wrap" x-show="$store.modal.is('auth')"
+      x-transition:enter="modal-scale-enter" x-transition:enter-start="modal-scale-from" x-transition:enter-end="modal-scale-to"
+      x-transition:leave="modal-scale-enter" x-transition:leave-start="modal-scale-to" x-transition:leave-end="modal-scale-from"
+      style="display:none;">
+      <div class="modal-panel modal-panel--md" @click.stop x-data="{ tab: 'signin' }">
+        <div class="modal-header">
+          <div class="modal-tabs">
+            <button class="modal-tab" :class="tab === 'signin' && 'is-active'" @click="tab = 'signin'" type="button">Sign In</button>
+            <button class="modal-tab" :class="tab === 'register' && 'is-active'" @click="tab = 'register'" type="button">Register</button>
+          </div>
+          <button class="modal-close" @click="$store.modal.close()" type="button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" x-show="tab === 'signin'" style="display:none;">
+          <form class="auth-form" @submit.prevent>
+            <div class="form-group">
+              <label>Phone or Email</label>
+              <div class="form-input-wrap"><i class="fa-solid fa-envelope"></i><input type="text" placeholder="Phone number or email address" /></div>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <div class="form-input-wrap"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Enter your password" /></div>
+            </div>
+            <div class="form-options">
+              <label class="form-check"><input type="checkbox" /> Remember me</label>
+              <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-auth">Sign In</button>
+          </form>
+        </div>
+        <div class="modal-body" x-show="tab === 'register'" style="display:none;">
+          <form class="auth-form" @submit.prevent>
+            <div class="form-group">
+              <label>Full Name</label>
+              <div class="form-input-wrap"><i class="fa-solid fa-user"></i><input type="text" placeholder="Your full name" /></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone Number</label>
+                <div class="form-input-wrap"><i class="fa-solid fa-phone"></i><input type="tel" placeholder="01XXXXXXXXX" /></div>
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <div class="form-input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" placeholder="your@email.com" /></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <div class="form-input-wrap"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Create a password" /></div>
+            </div>
+            <button type="submit" class="btn-auth">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="bottom-nav" x-data>
+    <a href="index.html" class="bottom-nav__item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <button class="bottom-nav__item" @click="$store.offcanvas.toggle()" type="button"><i class="fa-solid fa-bars"></i><span>Menu</span></button>
+    <a href="#" class="bottom-nav__item bottom-nav__item--cart" @click.prevent="$store.cart.toggle()">
+      <span class="bottom-nav__badge" x-text="$store.cart.count"></span>
+      <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+    </a>
+    <a href="#" class="bottom-nav__item"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a>
+    <a href="#" class="bottom-nav__item" @click.prevent="$store.modal.open('auth')"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  </nav>
+
+  <!-- ============ OFFCANVAS MENU ============ -->
+  <div x-data>
+    <div class="offcanvas__backdrop" x-show="$store.offcanvas.isOpen"
+      x-transition:enter="oc-backdrop-enter" x-transition:enter-start="oc-backdrop-start" x-transition:enter-end="oc-backdrop-end"
+      x-transition:leave="oc-backdrop-enter" x-transition:leave-start="oc-backdrop-end" x-transition:leave-end="oc-backdrop-start"
+      @click="$store.offcanvas.close()" style="display:none;"></div>
+    <aside class="offcanvas" x-show="$store.offcanvas.isOpen"
+      x-transition:enter="oc-panel-enter" x-transition:enter-start="oc-panel-start" x-transition:enter-end="oc-panel-end"
+      x-transition:leave="oc-panel-enter" x-transition:leave-start="oc-panel-end" x-transition:leave-end="oc-panel-start"
+      @keydown.escape.window="$store.offcanvas.close()" style="display:none;">
+      <div class="offcanvas__header">
+        <a href="index.html"><img src="assets/logo.png" alt="Gramer Dokan" /></a>
+        <button class="offcanvas__close" @click="$store.offcanvas.close()" type="button"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="offcanvas__section">
+        <div class="offcanvas__label">Navigation</div>
+        <ul class="offcanvas__nav">
+          <li><a href="index.html" class="oc-item--plain"><span class="oc-emoji">🏠</span>Home</a></li>
+          <li><a href="#" class="oc-item--plain"><span class="oc-emoji">🍯</span>Honey</a></li>
+          <li><a href="#" class="oc-item--plain"><span class="oc-emoji">🌴</span>Dates</a></li>
+          <li><a href="#" class="oc-item--plain"><span class="oc-emoji">🥭</span>Mango</a></li>
+          <li><a href="#" class="oc-item--plain"><span class="oc-emoji">🍚</span>Rice</a></li>
+          <li><a href="checkout.html" class="oc-item--plain"><span class="oc-emoji">🛒</span>Checkout</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ============ CART OFFCANVAS ============ -->
+  <div x-data>
+    <div class="cart-oc__backdrop" x-show="$store.cart.isOpen"
+      x-transition:enter="cart-backdrop-enter" x-transition:enter-start="cart-backdrop-start" x-transition:enter-end="cart-backdrop-end"
+      x-transition:leave="cart-backdrop-enter" x-transition:leave-start="cart-backdrop-end" x-transition:leave-end="cart-backdrop-start"
+      @click="$store.cart.close()" style="display:none;"></div>
+    <aside class="cart-oc" x-show="$store.cart.isOpen"
+      x-transition:enter="cart-panel-enter" x-transition:enter-start="cart-panel-start" x-transition:enter-end="cart-panel-end"
+      x-transition:leave="cart-panel-enter" x-transition:leave-start="cart-panel-end" x-transition:leave-end="cart-panel-start"
+      @keydown.escape.window="$store.cart.close()" style="display:none;">
+      <div class="cart-oc__header">
+        <h2>Shopping Cart</h2>
+        <button class="cart-oc__close" @click="$store.cart.close()" type="button">Close <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="cart-oc__body">
+        <div class="cart-oc__empty" x-show="$store.cart.items.length === 0">
+          <svg width="130" height="120" viewBox="0 0 130 120" fill="none"><circle cx="65" cy="60" r="56" fill="#EBF3FD"/><path d="M24 34 L38 34 L52 84 L98 84" stroke="#4A8FD4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M46 48 L96 48 L88 80 L54 80 Z" stroke="#4A8FD4" stroke-width="3" stroke-linejoin="round" fill="none"/><circle cx="58" cy="94" r="5.5" stroke="#4A8FD4" stroke-width="2.5" fill="white"/><circle cx="84" cy="94" r="5.5" stroke="#4A8FD4" stroke-width="2.5" fill="white"/><circle cx="71" cy="61" r="13" stroke="#4A8FD4" stroke-width="2" fill="white"/><path d="M65 55 L77 67 M77 55 L65 67" stroke="#4A8FD4" stroke-width="2" stroke-linecap="round"/></svg>
+          <p>No items in your cart!</p>
+        </div>
+        <div x-show="$store.cart.items.length > 0">
+          <template x-for="item in $store.cart.items" :key="item.id">
+            <div class="cart-item">
+              <img :src="item.image" :alt="item.name" class="cart-item__img" />
+              <div class="cart-item__info">
+                <div class="cart-item__name" x-text="item.name"></div>
+                <div class="cart-item__row">
+                  <div class="cart-item__controls">
+                    <button class="cart-item__qty-btn" @click="$store.cart.updateQty(item.id, -1)" type="button">−</button>
+                    <span class="cart-item__qty-val" x-text="item.qty"></span>
+                    <button class="cart-item__qty-btn" @click="$store.cart.updateQty(item.id, 1)" type="button">+</button>
+                  </div>
+                  <span class="cart-item__price-eq">
+                    <span class="sep">×</span><span x-text="'৳' + item.price.toLocaleString()"></span>
+                    <span class="sep">=</span><span class="total" x-text="'৳' + (item.price * item.qty).toLocaleString()"></span>
+                  </span>
+                </div>
+              </div>
+              <button class="cart-item__remove" @click="$store.cart.remove(item.id)" type="button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          </template>
+        </div>
+      </div>
+      <div class="cart-oc__footer" x-show="$store.cart.items.length > 0">
+        <div class="cart-oc__total">
+          <span class="label">Total:</span>
+          <span class="amount" x-text="$store.cart.formatPrice($store.cart.total)"></span>
+        </div>
+        <a href="checkout.html" class="cart-checkout-btn">Checkout</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ============ FLOATING CART ============ -->
+  <button class="cart-float" x-data @click="$store.cart.toggle()" type="button" title="View Cart">
+    <i class="fa-solid fa-bag-shopping"></i>
+    <span class="cart-float__count" x-text="$store.cart.count + ' Items'">0 Items</span>
+    <span class="cart-float__total" x-text="$store.cart.formatPrice($store.cart.total)">৳0.00</span>
+  </button>
+
+</body>
+</html>
