@@ -17,11 +17,45 @@ const sampleProducts = (count, prefix = 'Wild Sundarban Honey') => {
 // -------- Main app state --------
 document.addEventListener('alpine:init', () => {
   Alpine.store('cart', {
+    isOpen: false,
     items: [],
-    get count() { return this.items.length; },
+
+    get count() {
+      return this.items.reduce((sum, i) => sum + i.qty, 0);
+    },
+
+    get total() {
+      return this.items.reduce((sum, i) => sum + i.price * i.qty, 0);
+    },
+
+    formatPrice(n) {
+      return '৳' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    },
+
     add(product) {
-      this.items.push(product);
-    }
+      const existing = this.items.find(i => i.id === product.id);
+      if (existing) {
+        existing.qty++;
+      } else {
+        this.items.push({ ...product, qty: 1 });
+      }
+    },
+
+    remove(id) {
+      this.items = this.items.filter(i => i.id !== id);
+    },
+
+    updateQty(id, delta) {
+      const item = this.items.find(i => i.id === id);
+      if (!item) return;
+      const next = item.qty + delta;
+      if (next < 1) return;
+      item.qty = next;
+    },
+
+    open()   { this.isOpen = true;  document.body.style.overflow = 'hidden'; },
+    close()  { this.isOpen = false; document.body.style.overflow = ''; },
+    toggle() { this.isOpen ? this.close() : this.open(); }
   });
 
   Alpine.store('wishlist', {
@@ -80,6 +114,20 @@ window.carousel = (totalSlides = 3) => ({
     this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
   },
   goto(i) { this.currentSlide = i; }
+});
+
+// -------- Cart suggestions carousel --------
+window.cartSuggestions = () => ({
+  slide: 0,
+  products: [
+    { id: 'sg1', name: 'Himsagar Mango-10 kg', price: 1600, oldPrice: 1800, image: 'assets/products/product-1.svg' },
+    { id: 'sg2', name: 'Wild Sundarban Honey', price: 1990, oldPrice: 2200, image: 'assets/products/product-2.svg' },
+    { id: 'sg3', name: 'Khejur Gur — 1 kg',   price: 580,  oldPrice: 650,  image: 'assets/products/product-3.svg' },
+    { id: 'sg4', name: 'Gawa Ghee 500ml',      price: 950,  oldPrice: 1100, image: 'assets/products/product-4.svg' },
+  ],
+  get maxSlide() { return this.products.length - 1; },
+  next() { if (this.slide < this.maxSlide) this.slide++; },
+  prev() { if (this.slide > 0) this.slide--; }
 });
 
 // -------- Hero banner auto-rotate --------

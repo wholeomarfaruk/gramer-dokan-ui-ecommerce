@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <a href="#" class="header__cart" x-data>
+      <a href="#" class="header__cart" x-data @click.prevent="$store.cart.toggle()">
         <i class="fa-solid fa-cart-shopping"></i>
         <span>Shopping Cart</span>
         <span class="cart-count" x-text="$store.cart.count">0</span>
@@ -93,7 +93,7 @@
         <a href="#" class="mob-icon" title="Track Parcel"><i class="fa-solid fa-truck"></i></a>
         <a href="#" class="mob-icon" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
         <a href="#" class="mob-icon" title="Signin" @click.prevent="$store.modal.open('auth')"><i class="fa-regular fa-user"></i></a>
-        <a href="#" class="mob-icon mob-icon--cart" title="Cart">
+        <a href="#" class="mob-icon mob-icon--cart" title="Cart" @click.prevent="$store.cart.toggle()">
           <i class="fa-solid fa-cart-shopping"></i>
           <span class="mob-cart-badge" x-text="$store.cart.count"></span>
         </a>
@@ -108,14 +108,191 @@
   <nav class="mainnav">
     <div class="container mainnav__inner">
       <ul class="mainnav__categories">
-        <li><a href="#">Honey</a></li>
-        <li><a href="#">Dates</a></li>
-        <li><a href="#">Spices</a></li>
-        <li><a href="#">Nuts &amp; Seeds</a></li>
-        <li><a href="#">Beverage</a></li>
-        <li><a href="#">Mango</a></li>
-        <li><a href="#">Rice</a></li>
-        <li><a href="#">Ghee &amp; Oil</a></li>
+
+        <!-- Honey → Wild Honey → sub-sub -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Honey <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Wild Honey <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Sundarban Honey</a></li>
+                <li><a href="#">Mustard Flower Honey</a></li>
+                <li><a href="#">Litchi Flower Honey</a></li>
+                <li><a href="#">Black Forest Honey</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Organic Honey</a></li>
+            <li><a href="#">Date Honey (Khajur)</a></li>
+            <li><a href="#">Black Seed Honey</a></li>
+            <li><a href="#">Multifloral Honey</a></li>
+          </ul>
+        </li>
+
+        <!-- Dates → simple list -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Dates <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li><a href="#">Ajwa Dates</a></li>
+            <li><a href="#">Medjool Dates</a></li>
+            <li><a href="#">Mabroom Dates</a></li>
+            <li><a href="#">Amber Dates</a></li>
+            <li><a href="#">Ordinary Dates</a></li>
+          </ul>
+        </li>
+
+        <!-- Spices → Whole Spices → sub-sub -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Spices <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Whole Spices <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Cumin (Jeera)</a></li>
+                <li><a href="#">Coriander (Dhania)</a></li>
+                <li><a href="#">Cardamom (Elaichi)</a></li>
+                <li><a href="#">Cloves (Lavang)</a></li>
+                <li><a href="#">Black Pepper</a></li>
+              </ul>
+            </li>
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Ground Spices <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Turmeric Powder</a></li>
+                <li><a href="#">Chili Powder</a></li>
+                <li><a href="#">Garam Masala</a></li>
+                <li><a href="#">Cumin Powder</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Spice Combo Packs</a></li>
+          </ul>
+        </li>
+
+        <!-- Nuts & Seeds → Nuts → sub-sub, Seeds → sub-sub -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Nuts &amp; Seeds <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Nuts <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Almonds (Badam)</a></li>
+                <li><a href="#">Cashews (Kaju)</a></li>
+                <li><a href="#">Walnuts (Akhrot)</a></li>
+                <li><a href="#">Pistachios</a></li>
+              </ul>
+            </li>
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Seeds <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Chia Seeds</a></li>
+                <li><a href="#">Flax Seeds</a></li>
+                <li><a href="#">Sunflower Seeds</a></li>
+                <li><a href="#">Pumpkin Seeds</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Dry Fruits Mix</a></li>
+          </ul>
+        </li>
+
+        <!-- Beverage → Tea → sub-sub -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Beverage <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Tea <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Green Tea</a></li>
+                <li><a href="#">Black Tea</a></li>
+                <li><a href="#">Herbal Tea</a></li>
+                <li><a href="#">White Tea</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Coffee</a></li>
+            <li><a href="#">Health Drinks</a></li>
+            <li><a href="#">Sharbat &amp; Syrup</a></li>
+          </ul>
+        </li>
+
+        <!-- Mango → simple list -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Mango <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li><a href="#">Himsagar Mango</a></li>
+            <li><a href="#">Langra Mango</a></li>
+            <li><a href="#">Amrupali Mango</a></li>
+            <li><a href="#">Haribhanga Mango</a></li>
+            <li><a href="#">Gopalbhog Mango</a></li>
+          </ul>
+        </li>
+
+        <!-- Rice → Aromatic Rice → sub-sub -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Rice <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Aromatic Rice <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Kataribhog Rice</a></li>
+                <li><a href="#">Chinigura Rice</a></li>
+                <li><a href="#">Kalozira Rice</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Regular Rice</a></li>
+            <li><a href="#">Brown Rice</a></li>
+            <li><a href="#">Polao Rice</a></li>
+          </ul>
+        </li>
+
+        <!-- Ghee & Oil → Pure Ghee → sub-sub -->
+        <li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+          <a href="#">Ghee &amp; Oil <i class="fa-solid fa-chevron-down mainnav__chev" :class="{ 'mainnav__chev--open': open }"></i></a>
+          <ul class="mainnav__dropdown" x-show="open" style="display:none;"
+              x-transition:enter="nav-drop-enter" x-transition:enter-start="nav-drop-start" x-transition:enter-end="nav-drop-end"
+              x-transition:leave="nav-drop-enter" x-transition:leave-start="nav-drop-end"   x-transition:leave-end="nav-drop-start">
+            <li x-data="{ sub: false }" @mouseenter="sub = true" @mouseleave="sub = false">
+              <a href="#">Pure Ghee <i class="fa-solid fa-chevron-right chev-r"></i></a>
+              <ul class="mainnav__subdrop" x-show="sub" style="display:none;"
+                  x-transition:enter="nav-subdrop-enter" x-transition:enter-start="nav-subdrop-start" x-transition:enter-end="nav-subdrop-end"
+                  x-transition:leave="nav-subdrop-enter" x-transition:leave-start="nav-subdrop-end"   x-transition:leave-end="nav-subdrop-start">
+                <li><a href="#">Gawa Ghee</a></li>
+                <li><a href="#">Buffalo Ghee</a></li>
+                <li><a href="#">Goat Ghee</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Coconut Oil</a></li>
+            <li><a href="#">Mustard Oil</a></li>
+            <li><a href="#">Olive Oil</a></li>
+          </ul>
+        </li>
+
       </ul>
       <div class="mainnav__utilities">
         <a href="#"><i class="fa-solid fa-gift"></i>Corporate Gift</a>
@@ -932,7 +1109,7 @@
       <i class="fa-solid fa-bars"></i>
       <span>Menu</span>
     </button>
-    <a href="#" class="bottom-nav__item bottom-nav__item--cart">
+    <a href="#" class="bottom-nav__item bottom-nav__item--cart" @click.prevent="$store.cart.toggle()">
       <span class="bottom-nav__badge" x-text="$store.cart.count"></span>
       <i class="fa-solid fa-cart-shopping"></i>
       <span>Cart</span>
@@ -1093,6 +1270,146 @@
       </div>
     </aside>
   </div>
+
+
+  <!-- ============ CART OFFCANVAS ============ -->
+  <div x-data>
+
+    <!-- Backdrop -->
+    <div
+      class="cart-oc__backdrop"
+      x-show="$store.cart.isOpen"
+      x-transition:enter="cart-backdrop-enter"
+      x-transition:enter-start="cart-backdrop-start"
+      x-transition:enter-end="cart-backdrop-end"
+      x-transition:leave="cart-backdrop-enter"
+      x-transition:leave-start="cart-backdrop-end"
+      x-transition:leave-end="cart-backdrop-start"
+      @click="$store.cart.close()"
+      style="display:none;"
+    ></div>
+
+    <!-- Panel -->
+    <aside
+      class="cart-oc"
+      x-show="$store.cart.isOpen"
+      x-transition:enter="cart-panel-enter"
+      x-transition:enter-start="cart-panel-start"
+      x-transition:enter-end="cart-panel-end"
+      x-transition:leave="cart-panel-enter"
+      x-transition:leave-start="cart-panel-end"
+      x-transition:leave-end="cart-panel-start"
+      @keydown.escape.window="$store.cart.close()"
+      style="display:none;"
+    >
+
+      <!-- Header -->
+      <div class="cart-oc__header">
+        <h2>Shopping Cart</h2>
+        <button class="cart-oc__close" @click="$store.cart.close()" type="button">
+          Close <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="cart-oc__body">
+
+        <!-- Empty state -->
+        <div class="cart-oc__empty" x-show="$store.cart.items.length === 0">
+          <svg width="130" height="120" viewBox="0 0 130 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="65" cy="60" r="56" fill="#EBF3FD"/>
+            <path d="M24 34 L38 34 L52 84 L98 84" stroke="#4A8FD4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M46 48 L96 48 L88 80 L54 80 Z" stroke="#4A8FD4" stroke-width="3" stroke-linejoin="round" fill="none"/>
+            <circle cx="58" cy="94" r="5.5" stroke="#4A8FD4" stroke-width="2.5" fill="white"/>
+            <circle cx="84" cy="94" r="5.5" stroke="#4A8FD4" stroke-width="2.5" fill="white"/>
+            <circle cx="71" cy="61" r="13" stroke="#4A8FD4" stroke-width="2" fill="white"/>
+            <path d="M65 55 L77 67 M77 55 L65 67" stroke="#4A8FD4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <p>No items in your cart!</p>
+        </div>
+
+        <!-- Items list -->
+        <div x-show="$store.cart.items.length > 0">
+          <template x-for="item in $store.cart.items" :key="item.id">
+            <div class="cart-item">
+              <img :src="item.image" :alt="item.name" class="cart-item__img" />
+              <div class="cart-item__info">
+                <div class="cart-item__name" x-text="item.name"></div>
+                <div class="cart-item__row">
+                  <div class="cart-item__controls">
+                    <button class="cart-item__qty-btn" @click="$store.cart.updateQty(item.id, -1)" type="button">−</button>
+                    <span class="cart-item__qty-val" x-text="item.qty"></span>
+                    <button class="cart-item__qty-btn" @click="$store.cart.updateQty(item.id, 1)" type="button">+</button>
+                  </div>
+                  <span class="cart-item__price-eq">
+                    <span class="sep">×</span>
+                    <span x-text="'৳' + item.price.toLocaleString()"></span>
+                    <span class="sep">=</span>
+                    <span class="total" x-text="'৳' + (item.price * item.qty).toLocaleString()"></span>
+                  </span>
+                </div>
+              </div>
+              <button class="cart-item__remove" @click="$store.cart.remove(item.id)" type="button" title="Remove">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </template>
+        </div><!-- /items -->
+
+      </div><!-- /body -->
+
+      <!-- You May Also Like — fixed above footer -->
+      <div class="cart-suggestions" x-show="$store.cart.items.length > 0" x-data="cartSuggestions()">
+        <div class="cart-suggestions__header">
+          <h3>You May Also Like</h3>
+          <div class="cart-suggestions__arrows">
+            <button @click="prev()" type="button" :disabled="slide === 0">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button @click="next()" type="button" :disabled="slide >= maxSlide">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="cart-suggestions__track-wrap">
+          <div class="cart-suggestions__track"
+               :style="'transform: translateX(calc(-' + slide + ' * (77% + 10px)))'">
+            <template x-for="p in products" :key="p.id">
+              <div class="cart-suggest-card">
+                <img :src="p.image" :alt="p.name" class="cart-suggest-card__img" />
+                <div class="cart-suggest-card__body">
+                  <div class="cart-suggest-card__name" x-text="p.name"></div>
+                  <div class="cart-suggest-card__price" x-text="'৳' + p.price.toLocaleString()"></div>
+                  <div class="cart-suggest-card__actions">
+                    <button class="cart-suggest-card__btn cart-suggest-card__btn--view" type="button">View</button>
+                    <button class="cart-suggest-card__btn cart-suggest-card__btn--cart" @click="$store.cart.add(p)" type="button">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="cart-oc__footer" x-show="$store.cart.items.length > 0">
+        <div class="cart-oc__total">
+          <span class="label">Total:</span>
+          <span class="amount" x-text="$store.cart.formatPrice($store.cart.total)"></span>
+        </div>
+        <button class="cart-checkout-btn" type="button">Checkout</button>
+      </div>
+
+    </aside>
+  </div>
+  <!-- ============ END CART OFFCANVAS ============ -->
+
+  <!-- ============ FLOATING CART WIDGET ============ -->
+  <button class="cart-float" x-data @click="$store.cart.toggle()" type="button" title="View Cart">
+    <i class="fa-solid fa-bag-shopping"></i>
+    <span class="cart-float__count" x-text="$store.cart.count + ' Items'">0 Items</span>
+    <span class="cart-float__total" x-text="$store.cart.formatPrice($store.cart.total)">৳0.00</span>
+  </button>
 
 </body>
 </html>

@@ -279,6 +279,8 @@
     gap: 0;
 
     > li {
+      position: relative;
+
       > a {
         display: inline-flex;
         align-items: center;
@@ -331,6 +333,112 @@
       &:hover { background: rgba(0, 0, 0, 0.08); }
     }
   }
+}
+
+// ── Dropdown chevron ──
+.mainnav__chev {
+  font-size: 9px;
+  margin-left: 3px;
+  opacity: 0.75;
+  transition: transform $transition-base;
+  flex-shrink: 0;
+
+  &--open { transform: rotate(180deg); }
+}
+
+// ── Dropdown / subdropdown transition helpers ──
+.nav-drop-enter    { transition: opacity 0.15s ease, transform 0.15s ease; transform-origin: top left; }
+.nav-drop-start    { opacity: 0; transform: translateY(-6px); }
+.nav-drop-end      { opacity: 1; transform: translateY(0); }
+
+.nav-subdrop-enter { transition: opacity 0.12s ease, transform 0.12s ease; transform-origin: top left; }
+.nav-subdrop-start { opacity: 0; transform: translateX(-6px); }
+.nav-subdrop-end   { opacity: 1; transform: translateX(0); }
+
+// ── Level-1 dropdown ──
+.mainnav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 210px;
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-top: 3px solid $color-yellow;
+  border-radius: 0 0 $radius-md $radius-md;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  z-index: 500;
+  overflow: visible;
+  padding: 4px 0;
+
+  > li {
+    position: relative;
+
+    > a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 16px;
+      font-size: $fs-base;
+      color: $color-gray-800;
+      font-weight: $fw-medium;
+      border-bottom: 1px solid $color-gray-100;
+      transition: background $transition-fast, color $transition-fast, padding-left $transition-fast;
+
+      .chev-r {
+        font-size: 9px;
+        color: $color-gray-400;
+        flex-shrink: 0;
+        transition: color $transition-fast;
+      }
+
+      &:hover {
+        background: $color-yellow;
+        color: $color-black;
+        padding-left: 20px;
+
+        .chev-r { color: $color-black; }
+      }
+    }
+
+    &:last-child > a { border-bottom: 0; }
+
+    // highlight the parent row when subdrop is open
+    &:hover > a { background: $color-yellow; color: $color-black; padding-left: 20px; }
+  }
+}
+
+// ── Level-2 sub-dropdown (flies out to the right) ──
+.mainnav__subdrop {
+  position: absolute;
+  top: -5px;
+  left: 100%;
+  min-width: 190px;
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-left: 3px solid $color-yellow;
+  border-radius: 0 $radius-md $radius-md $radius-md;
+  box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.10);
+  z-index: 501;
+  overflow: hidden;
+  padding: 4px 0;
+
+  > li > a {
+    display: block;
+    padding: 9px 16px;
+    font-size: $fs-base;
+    color: $color-gray-700;
+    font-weight: $fw-regular;
+    border-bottom: 1px solid $color-gray-100;
+    transition: background $transition-fast, color $transition-fast, padding-left $transition-fast;
+
+    &:hover {
+      background: $color-yellow;
+      color: $color-black;
+      padding-left: 22px;
+    }
+  }
+
+  > li:last-child > a { border-bottom: 0; }
 }
 
 // ============================================
