@@ -536,7 +536,7 @@
       x-transition:enter="modal-scale-enter" x-transition:enter-start="modal-scale-from" x-transition:enter-end="modal-scale-to"
       x-transition:leave="modal-scale-enter" x-transition:leave-start="modal-scale-to" x-transition:leave-end="modal-scale-from"
       style="display:none;">
-      <div class="modal-panel modal-panel--md" @click.stop x-data="{ tab: 'signin' }">
+      <div class="modal-panel modal-panel--sm" @click.stop x-data="{ tab: 'signin' }">
         <div class="modal-header">
           <div class="modal-tabs">
             <button class="modal-tab" :class="tab === 'signin' && 'is-active'" @click="tab = 'signin'" type="button">Sign In</button>

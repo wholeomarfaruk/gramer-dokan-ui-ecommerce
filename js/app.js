@@ -133,7 +133,7 @@ window.cartSuggestions = () => ({
 // -------- Hero banner auto-rotate --------
 window.heroSlider = () => ({
   slide: 0,
-  total: 3,
+  total: 4,
   interval: null,
   init() {
     this.interval = setInterval(() => {

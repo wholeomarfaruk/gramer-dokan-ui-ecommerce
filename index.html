@@ -310,11 +310,15 @@
       <div class="hero__grid">
         <!-- Main banner -->
         <div class="hero__banner hero__banner--image" x-data="heroSlider">
-          <img src="assets/hero-banner.jpg" alt="Season Fresh Mango — Gramer Dokan" class="hero__banner__img" />
+          <img src="assets/hero-banner.jpg" alt="Season Fresh Mango — Gramer Dokan" class="hero__banner__img" x-show="slide===0" x-transition.opacity.duration.500ms />
+          <img src="assets/hero-banner-01.png" alt="Season Fresh Mango — Gramer Dokan" class="hero__banner__img" x-show="slide===1" x-transition.opacity.duration.500ms />
+          <img src="assets/hero-banner-02.png" alt="Season Fresh Mango — Gramer Dokan" class="hero__banner__img" x-show="slide===2" x-transition.opacity.duration.500ms />
+          <img src="assets/hero-banner-03.jpg" alt="Season Fresh Mango — Gramer Dokan" class="hero__banner__img" x-show="slide===3" x-transition.opacity.duration.500ms />
           <div class="hero__banner__dots">
             <span :class="slide===0 && 'active'" @click="slide=0"></span>
             <span :class="slide===1 && 'active'" @click="slide=1"></span>
             <span :class="slide===2 && 'active'" @click="slide=2"></span>
+            <span :class="slide===3 && 'active'" @click="slide=3"></span>
           </div>
         </div>
 
@@ -985,7 +989,7 @@
       x-transition:leave-end="modal-scale-from"
       style="display:none;"
     >
-      <div class="modal-panel modal-panel--md" @click.stop x-data="{ tab: 'signin' }">
+      <div class="modal-panel modal-panel--sm" @click.stop x-data="{ tab: 'signin' }">
 
         <!-- Header: tabs + close -->
         <div class="modal-header">
